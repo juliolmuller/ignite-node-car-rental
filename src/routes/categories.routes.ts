@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { v4 as uuid } from 'uuid';
 
 export const categoriesRoutes = Router();
 
@@ -7,7 +8,7 @@ const categories: any[] = [];
 categoriesRoutes.post('/categories', (request, response) => {
   const { name, description } = request.body;
   const category = {
-    id: categories.reduce((lastId, { id }) => Math.max(lastId, id), 0) + 1,
+    id: uuid(),
     name,
     description,
   };
