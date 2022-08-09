@@ -16,6 +16,18 @@ export class CategoriesRepository {
     return this.categories;
   }
 
+  find(id: string): Category | null {
+    const category = this.categories.find((category) => category.id === id);
+
+    return category || null;
+  }
+
+  findByName(name: string): Category | null {
+    const category = this.categories.find((category) => category.name === name);
+
+    return category || null;
+  }
+
   create({ name, description }: ICreateCategoryDTO): Category {
     const category = new Category();
 
