@@ -12,6 +12,10 @@ export class CategoriesRepository {
     this.categories = [];
   }
 
+  list(): Category[] {
+    return this.categories;
+  }
+
   create({ name, description }: ICreateCategoryDTO): Category {
     const category = new Category();
 
