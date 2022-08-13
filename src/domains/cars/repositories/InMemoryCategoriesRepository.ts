@@ -1,11 +1,22 @@
-import Category from '../models/Category';
+import { Category } from '../models';
 import { ICategoriesRepository, ICreateCategoryDTO } from './interfaces';
 
-export class CategoriesRepository implements ICategoriesRepository {
+export class InMemoryCategoriesRepository implements ICategoriesRepository {
+  // eslint-disable-next-line no-use-before-define
+  private static SINGLETON: InMemoryCategoriesRepository;
+
   private categories: Category[];
 
-  constructor() {
+  private constructor() {
     this.categories = [];
+  }
+
+  static getInstance(): InMemoryCategoriesRepository {
+    if (!InMemoryCategoriesRepository.SINGLETON) {
+      InMemoryCategoriesRepository.SINGLETON = new InMemoryCategoriesRepository();
+    }
+
+    return InMemoryCategoriesRepository.SINGLETON;
   }
 
   list(): Category[] {
@@ -38,5 +49,3 @@ export class CategoriesRepository implements ICategoriesRepository {
     return category;
   }
 }
-
-export default new CategoriesRepository();

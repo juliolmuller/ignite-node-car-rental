@@ -1,7 +1,7 @@
-import Category from '../models/Category';
-import { ICategoriesRepository } from '../repositories/interfaces';
+import { Category } from '../models';
+import { ICategoriesRepository } from '../repositories';
 
-export default class ListCategoriesService {
+export class ListCategoriesService {
   constructor(private categoriesRepository: ICategoriesRepository) {}
 
   public execute(): Category[] {

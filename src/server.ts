@@ -2,7 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import morgan from 'morgan';
 
-import { categoriesRoutes } from './routes/categories.routes';
+import { categoriesRoutes } from './routes';
 
 export const app = express();
 

@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
-export default class Category {
+export class Category {
   readonly id: string;
   name: string;
   description: string;

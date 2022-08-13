@@ -1,12 +1,12 @@
-import Category from '../models/Category';
-import { ICategoriesRepository } from '../repositories/interfaces';
+import { Category } from '../models';
+import { ICategoriesRepository } from '../repositories';
 
-export interface IRequest {
+interface IRequest {
   name: string;
   description: string;
 }
 
-export default class CreateCategoryService {
+export class CreateCategoryService {
   constructor(private categoriesRepository: ICategoriesRepository) {}
 
   public execute({ name, description }: IRequest): Category {
