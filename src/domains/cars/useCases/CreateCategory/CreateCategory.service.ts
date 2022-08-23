@@ -14,7 +14,7 @@ export class CreateCategoryService implements IService<Category, IPayload> {
     const categoryAlreadyExists = this.repository.findByName(name);
 
     if (categoryAlreadyExists) {
-      throw new Error('Category already exists!');
+      throw new Error('Category already exists');
     }
 
     const createdCategory = this.repository.create({ name, description });
