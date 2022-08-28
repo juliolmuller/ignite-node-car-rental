@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "RentalX API Documentation",
+    "title": "RentX API Documentation",
     "description": "Backend API for car rental businesses",
     "version": "1.0.0",
     "contact": {
