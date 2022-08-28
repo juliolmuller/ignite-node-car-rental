@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: rentx
+    build: ./
+    ports:
+      - 8081:8081
+    volumes:
+      - ./:/user/app/
