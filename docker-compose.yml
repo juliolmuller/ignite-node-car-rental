@@ -1,10 +1,33 @@
-version: "3.8"
+version: "3.9"
 
 services:
   app:
     container_name: rentx
     build: ./
+    restart: always
+    depends_on:
+      - database
+    links:
+      - database
     ports:
       - 8081:8081
+      - 9229:9229
     volumes:
-      - ./:/user/app/
+      - ./:/usr/app/
+
+  database:
+    container_name: database_rentx
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=rentx
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/data/posgres/
+
+volumes:
+  pgdata:
+    driver: local
