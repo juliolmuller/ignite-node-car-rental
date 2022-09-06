@@ -9,3 +9,23 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Category {
+  id          String   @id @default(uuid()) @db.VarChar(100)
+  name        String   @db.VarChar(255)
+  description String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  @@map("categories")
+}
+
+model Specification {
+  id          String   @id @default(uuid()) @db.VarChar(100)
+  name        String   @db.VarChar(255)
+  description String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  @@map("specifications")
+}
