@@ -37,11 +37,13 @@ export class InMemoryCategoriesRepository implements ICategoriesRepository {
 
   async create({ name, description }: ICreateCategoryDTO): Promise<Category> {
     const category = new Category();
+    const now = new Date();
 
     Object.assign(category, {
       name,
       description,
-      created_at: new Date(),
+      created_at: now,
+      updated_at: now,
     });
 
     this.categories.push(category);

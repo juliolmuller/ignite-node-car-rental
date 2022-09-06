@@ -37,11 +37,13 @@ export class InMemorySpecificationsRepository implements ISpecificationsReposito
 
   async create({ name, description }: ICreateSpecificationDTO): Promise<Specification> {
     const specification = new Specification();
+    const now = new Date();
 
     Object.assign(specification, {
       name,
       description,
-      created_at: new Date(),
+      created_at: now,
+      updated_at: now,
     });
 
     this.specifications.push(specification);
