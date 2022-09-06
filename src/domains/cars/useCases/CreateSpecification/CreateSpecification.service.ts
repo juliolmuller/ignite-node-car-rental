@@ -10,14 +10,14 @@ export interface IPayload {
 export class CreateSpecificationService implements IService<Specification, IPayload> {
   constructor(private repository: ISpecificationsRepository) {}
 
-  public execute({ name, description }: IPayload): Specification {
-    const specificationAlreadyExists = this.repository.findByName(name);
+  async execute({ name, description }: IPayload): Promise<Specification> {
+    const specificationAlreadyExists = await this.repository.findByName(name);
 
     if (specificationAlreadyExists) {
       throw new Error('Specification already exists');
     }
 
-    const createdSpecification = this.repository.create({ name, description });
+    const createdSpecification = await this.repository.create({ name, description });
 
     return createdSpecification;
   }

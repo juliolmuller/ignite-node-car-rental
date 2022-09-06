@@ -19,23 +19,23 @@ export class InMemorySpecificationsRepository implements ISpecificationsReposito
     return InMemorySpecificationsRepository.SINGLETON;
   }
 
-  list(): Specification[] {
+  async list(): Promise<Specification[]> {
     return this.specifications;
   }
 
-  find(id: string): Specification | null {
+  async find(id: string): Promise<Specification | null> {
     const specification = this.specifications.find((specification) => specification.id === id);
 
     return specification || null;
   }
 
-  findByName(name: string): Specification | null {
+  async findByName(name: string): Promise<Specification | null> {
     const specification = this.specifications.find((specification) => specification.name === name);
 
     return specification || null;
   }
 
-  create({ name, description }: ICreateSpecificationDTO): Specification {
+  async create({ name, description }: ICreateSpecificationDTO): Promise<Specification> {
     const specification = new Specification();
 
     Object.assign(specification, {

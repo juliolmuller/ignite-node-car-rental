@@ -10,14 +10,14 @@ export interface IPayload {
 export class CreateCategoryService implements IService<Category, IPayload> {
   constructor(private repository: ICategoriesRepository) {}
 
-  public execute({ name, description }: IPayload): Category {
-    const categoryAlreadyExists = this.repository.findByName(name);
+  async execute({ name, description }: IPayload): Promise<Category> {
+    const categoryAlreadyExists = await this.repository.findByName(name);
 
     if (categoryAlreadyExists) {
       throw new Error('Category already exists');
     }
 
-    const createdCategory = this.repository.create({ name, description });
+    const createdCategory = await this.repository.create({ name, description });
 
     return createdCategory;
   }

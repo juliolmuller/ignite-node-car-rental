@@ -7,8 +7,8 @@ import { IPayload } from './CreateSpecification.service';
 export class CreateSpecificationController implements IController {
   constructor(private service: IService<Specification, IPayload>) {}
 
-  handle = (request: Request, response: Response) => {
-    const specification = this.service.execute(request.body);
+  handle = async (request: Request, response: Response) => {
+    const specification = await this.service.execute(request.body);
 
     response.status(201).json(specification);
   };

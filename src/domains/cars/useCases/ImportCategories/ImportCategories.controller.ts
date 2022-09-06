@@ -5,7 +5,7 @@ import { Category } from '../../models';
 import { IPayload } from './ImportCategories.service';
 
 export class ImportCategoriesController implements IController {
-  constructor(private service: IService<Promise<Category[]>, IPayload>) {}
+  constructor(private service: IService<Category[], IPayload>) {}
 
   handle = async (request: Request, response: Response) => {
     const categories = await this.service.execute(request.file);

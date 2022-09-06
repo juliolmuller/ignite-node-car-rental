@@ -7,10 +7,10 @@ import { ICategoriesRepository } from '../../repositories';
 
 export type IPayload = Express.Multer.File;
 
-export class ImportCategoriesService implements IService<Promise<Category[]>, IPayload> {
+export class ImportCategoriesService implements IService<Category[], IPayload> {
   constructor(private repository: ICategoriesRepository) {}
 
-  public execute(file: IPayload): Promise<Category[]> {
+  execute(file: IPayload): Promise<Category[]> {
     const parser = csvParse();
     const stream = fs.createReadStream(file.path);
     const createdCategories: Category[] = [];
@@ -25,14 +25,14 @@ export class ImportCategoriesService implements IService<Promise<Category[]>, IP
       });
 
       // runs routine for each line of the csv file
-      parser.on('data', ([name, description]) => {
-        const categoryAlreadyExists = this.repository.findByName(name);
+      parser.on('data', async ([name, description]) => {
+        const categoryAlreadyExists = await this.repository.findByName(name);
 
         if (categoryAlreadyExists) {
           reject(new Error(`Category "${name}" already exists!`));
         }
 
-        const createdCategory = this.repository.create({ name, description });
+        const createdCategory = await this.repository.create({ name, description });
 
         createdCategories.push(createdCategory);
       });

@@ -6,8 +6,8 @@ import { Category } from '../../models';
 export class ListCategoriesController implements IController {
   constructor(private service: IService<Category[]>) {}
 
-  handle = (_: Request, response: Response) => {
-    const categories = this.service.execute();
+  handle = async (_: Request, response: Response) => {
+    const categories = await this.service.execute();
 
     response.status(200).json(categories);
   };

@@ -19,23 +19,23 @@ export class InMemoryCategoriesRepository implements ICategoriesRepository {
     return InMemoryCategoriesRepository.SINGLETON;
   }
 
-  list(): Category[] {
+  async list(): Promise<Category[]> {
     return this.categories;
   }
 
-  find(id: string): Category | null {
+  async find(id: string): Promise<Category | null> {
     const category = this.categories.find((category) => category.id === id);
 
     return category || null;
   }
 
-  findByName(name: string): Category | null {
+  async findByName(name: string): Promise<Category | null> {
     const category = this.categories.find((category) => category.name === name);
 
     return category || null;
   }
 
-  create({ name, description }: ICreateCategoryDTO): Category {
+  async create({ name, description }: ICreateCategoryDTO): Promise<Category> {
     const category = new Category();
 
     Object.assign(category, {

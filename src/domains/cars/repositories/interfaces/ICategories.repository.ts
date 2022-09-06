@@ -6,8 +6,8 @@ export interface ICreateCategoryDTO {
 }
 
 export interface ICategoriesRepository {
-  list(): Category[];
-  find(id: string): Category | null;
-  findByName(name: string): Category | null;
-  create({ name, description }: ICreateCategoryDTO): Category;
+  list(): Promise<Category[]>;
+  find(id: string): Promise<Category | null>;
+  findByName(name: string): Promise<Category | null>;
+  create({ name, description }: ICreateCategoryDTO): Promise<Category>;
 }
