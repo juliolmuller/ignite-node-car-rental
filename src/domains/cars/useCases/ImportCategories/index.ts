@@ -1,8 +1,8 @@
-import { InMemoryCategoriesRepository } from '../../repositories';
+import { PrismaCategoriesRepository } from '../../repositories';
 import { ImportCategoriesController } from './ImportCategories.controller';
 import { ImportCategoriesService } from './ImportCategories.service';
 
-const categoriesRepository = InMemoryCategoriesRepository.getInstance();
+const categoriesRepository = PrismaCategoriesRepository.getInstance();
 const importCategoriesService = new ImportCategoriesService(categoriesRepository);
 const importCategoriesController = new ImportCategoriesController(importCategoriesService);
 
