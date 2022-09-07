@@ -3,7 +3,7 @@ import { Router } from 'express';
 import {
   createSpecificationController,
   listSpecificationsController,
-} from '../domains/cars/useCases';
+} from '../modules/cars/useCases';
 
 export const specificationsRoutes = Router();
 

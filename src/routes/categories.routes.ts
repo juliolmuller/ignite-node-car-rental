@@ -5,7 +5,7 @@ import {
   createCategoryController,
   importCategoriesController,
   listCategoriesController,
-} from '../domains/cars/useCases';
+} from '../modules/cars/useCases';
 
 const upload = multer({ dest: './tmp' });
 
