@@ -1,41 +1,66 @@
-import { parse as csvParse } from 'csv-parse';
+import { parse } from 'csv-parse';
 import fs from 'node:fs';
 
 import { IService } from '../../../../types';
-import { Category } from '../../models';
 import { ICategoriesRepository } from '../../repositories';
 
 export type IPayload = Express.Multer.File;
 
-export class ImportCategoriesService implements IService<Category[], IPayload> {
+export type IResult = {
+  success_count: number;
+  failure_count: number;
+  unsaved_records?: Array<{
+    error: string;
+    data: {
+      description?: string;
+      name?: string;
+    };
+  }>;
+};
+
+export class ImportCategoriesService implements IService<IResult, IPayload> {
   constructor(private repository: ICategoriesRepository) {}
 
-  execute(file: IPayload): Promise<Category[]> {
-    const parser = csvParse();
-    const stream = fs.createReadStream(file.path);
-    const createdCategories: Category[] = [];
+  async execute(file: IPayload): Promise<IResult> {
+    const parser = parse();
+    const unsavedRecords: IResult['unsaved_records'] = [];
+    let successCount = 0;
 
-    stream.pipe(parser);
+    fs.createReadStream(file.path).pipe(parser);
 
-    return new Promise((resolve, reject) => {
-      // runs routine when the file is fully read
-      parser.on('end', () => {
-        fs.promises.unlink(file.path);
-        resolve(createdCategories);
-      });
+    for await (const [name, description] of parser) {
+      if (!name) {
+        unsavedRecords.push({
+          error: 'Field "name" cannot be empty.',
+          data: { name, description },
+        });
+        continue;
+      }
 
-      // runs routine for each line of the csv file
-      parser.on('data', async ([name, description]) => {
-        const categoryAlreadyExists = await this.repository.findByName(name);
+      if (!description) {
+        unsavedRecords.push({
+          error: 'Field "description" cannot be empty.',
+          data: { name, description },
+        });
+        continue;
+      }
 
-        if (categoryAlreadyExists) {
-          reject(new Error(`Category "${name}" already exists!`));
-        }
+      if (await this.repository.findByName(name)) {
+        unsavedRecords.push({
+          error: `Category with name "${name}" already exists.`,
+          data: { name, description },
+        });
+        continue;
+      }
 
-        const createdCategory = await this.repository.create({ name, description });
+      await this.repository.create({ name, description });
+      successCount++;
+    }
 
-        createdCategories.push(createdCategory);
-      });
-    });
+    return {
+      success_count: successCount,
+      failure_count: unsavedRecords.length,
+      unsaved_records: unsavedRecords.length ? unsavedRecords : undefined,
+    };
   }
 }

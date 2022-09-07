@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
 
 import { IController, IService } from '../../../../types';
-import { Category } from '../../models';
-import { IPayload } from './ImportCategories.service';
+import { IPayload, IResult } from './ImportCategories.service';
 
 export class ImportCategoriesController implements IController {
-  constructor(private service: IService<Category[], IPayload>) {}
+  constructor(private service: IService<IResult, IPayload>) {}
 
   handle = async (request: Request, response: Response) => {
-    const categories = await this.service.execute(request.file);
+    const result = await this.service.execute(request.file);
+    const status = result.success_count ? 201 : 400;
 
-    response.status(201).json(categories);
+    response.status(status).json(result);
   };
 }
