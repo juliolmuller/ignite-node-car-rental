@@ -3,21 +3,6 @@ import { Category } from '../models';
 import { ICategoriesRepository, ICreateCategoryDTO } from './interfaces';
 
 export class PrismaCategoriesRepository implements ICategoriesRepository {
-  // eslint-disable-next-line no-use-before-define
-  private static SINGLETON: PrismaCategoriesRepository;
-
-  private constructor() {
-    // no actions
-  }
-
-  static getInstance(): PrismaCategoriesRepository {
-    if (!PrismaCategoriesRepository.SINGLETON) {
-      PrismaCategoriesRepository.SINGLETON = new PrismaCategoriesRepository();
-    }
-
-    return PrismaCategoriesRepository.SINGLETON;
-  }
-
   list(): Promise<Category[]> {
     return prisma.category.findMany();
   }

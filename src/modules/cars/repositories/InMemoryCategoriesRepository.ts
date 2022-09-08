@@ -2,22 +2,7 @@ import { Category } from '../models';
 import { ICategoriesRepository, ICreateCategoryDTO } from './interfaces';
 
 export class InMemoryCategoriesRepository implements ICategoriesRepository {
-  // eslint-disable-next-line no-use-before-define
-  private static SINGLETON: InMemoryCategoriesRepository;
-
   private categories: Category[];
-
-  private constructor() {
-    this.categories = [];
-  }
-
-  static getInstance(): InMemoryCategoriesRepository {
-    if (!InMemoryCategoriesRepository.SINGLETON) {
-      InMemoryCategoriesRepository.SINGLETON = new InMemoryCategoriesRepository();
-    }
-
-    return InMemoryCategoriesRepository.SINGLETON;
-  }
 
   async list(): Promise<Category[]> {
     return this.categories;

@@ -3,21 +3,6 @@ import { Specification } from '../models';
 import { ISpecificationsRepository, ICreateSpecificationDTO } from './interfaces';
 
 export class PrismaSpecificationsRepository implements ISpecificationsRepository {
-  // eslint-disable-next-line no-use-before-define
-  private static SINGLETON: PrismaSpecificationsRepository;
-
-  private constructor() {
-    // no actions
-  }
-
-  static getInstance(): PrismaSpecificationsRepository {
-    if (!PrismaSpecificationsRepository.SINGLETON) {
-      PrismaSpecificationsRepository.SINGLETON = new PrismaSpecificationsRepository();
-    }
-
-    return PrismaSpecificationsRepository.SINGLETON;
-  }
-
   list(): Promise<Specification[]> {
     return prisma.specification.findMany();
   }

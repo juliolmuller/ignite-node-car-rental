@@ -2,22 +2,7 @@ import { Specification } from '../models';
 import { ISpecificationsRepository, ICreateSpecificationDTO } from './interfaces';
 
 export class InMemorySpecificationsRepository implements ISpecificationsRepository {
-  // eslint-disable-next-line no-use-before-define
-  private static SINGLETON: InMemorySpecificationsRepository;
-
   private specifications: Specification[];
-
-  private constructor() {
-    this.specifications = [];
-  }
-
-  static getInstance(): InMemorySpecificationsRepository {
-    if (!InMemorySpecificationsRepository.SINGLETON) {
-      InMemorySpecificationsRepository.SINGLETON = new InMemorySpecificationsRepository();
-    }
-
-    return InMemorySpecificationsRepository.SINGLETON;
-  }
 
   async list(): Promise<Specification[]> {
     return this.specifications;

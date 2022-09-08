@@ -1,15 +1,14 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
-import { IController, IService } from '../../../../types';
-import { Specification } from '../../models';
-import { IPayload } from './CreateSpecification.service';
+import { IController } from '../../../../types';
+import { CreateSpecificationService } from './CreateSpecification.service';
 
 export class CreateSpecificationController implements IController {
-  constructor(private service: IService<Specification, IPayload>) {}
-
-  handle = async (request: Request, response: Response) => {
-    const specification = await this.service.execute(request.body);
+  async handle(request: Request, response: Response) {
+    const service = container.resolve(CreateSpecificationService);
+    const specification = await service.execute(request.body);
 
     response.status(201).json(specification);
-  };
+  }
 }

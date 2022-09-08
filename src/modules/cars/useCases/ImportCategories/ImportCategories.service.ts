@@ -1,5 +1,6 @@
 import { parse } from 'csv-parse';
 import fs from 'node:fs';
+import { inject, injectable } from 'tsyringe';
 
 import { IService } from '../../../../types';
 import { ICategoriesRepository } from '../../repositories';
@@ -18,8 +19,12 @@ export type IResult = {
   }>;
 };
 
+@injectable()
 export class ImportCategoriesService implements IService<IResult, IPayload> {
-  constructor(private repository: ICategoriesRepository) {}
+  constructor(
+    @inject('CategoriesRepository')
+    private repository: ICategoriesRepository
+  ) {}
 
   async execute(file: IPayload): Promise<IResult> {
     const parser = parse();

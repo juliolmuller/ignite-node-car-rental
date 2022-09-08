@@ -3,6 +3,7 @@ import express from 'express';
 import morgan from 'morgan';
 import swagger from 'swagger-ui-express';
 
+import './container';
 import { categoriesRoutes, specificationsRoutes } from './routes';
 import swaggerConfig from './swagger.json';
 
