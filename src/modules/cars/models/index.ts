@@ -1,2 +1,2 @@
-export * from './Category';
-export * from './Specification';
+export * from './Category.model';
+export * from './Specification.model';
