@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { container } from 'tsyringe';
 
+import { IUsersRepository, PrismaUsersRepository } from '../modules/auth/repositories';
 import {
   ICategoriesRepository,
   ISpecificationsRepository,
@@ -17,3 +18,5 @@ container.registerSingleton<ISpecificationsRepository>(
   'SpecificationsRepository',
   PrismaSpecificationsRepository
 );
+
+container.registerSingleton<IUsersRepository>('UsersRepository', PrismaUsersRepository);
