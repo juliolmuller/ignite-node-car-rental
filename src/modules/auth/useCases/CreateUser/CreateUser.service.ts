@@ -1,3 +1,4 @@
+import { hash } from 'bcrypt';
 import { inject, injectable } from 'tsyringe';
 
 import { IService } from '../../../../types';
@@ -19,11 +20,12 @@ export class CreateUserService implements IService<User, IPayload> {
   ) {}
 
   async execute({ driver_license, email, name, password }: IPayload): Promise<User> {
+    const hashedPassword = await hash(password, 8);
     const createdUser = await this.repository.create({
       driver_license,
       email,
       name,
-      password,
+      password: hashedPassword,
     });
 
     return createdUser;
