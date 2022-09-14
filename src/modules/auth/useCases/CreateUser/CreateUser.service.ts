@@ -20,6 +20,12 @@ export class CreateUserService implements IService<User, IPayload> {
   ) {}
 
   async execute({ driver_license, email, name, password }: IPayload): Promise<User> {
+    const emailAlreadyExists = await this.repository.findByEmail(email);
+
+    if (emailAlreadyExists) {
+      throw new Error('Email already exists');
+    }
+
     const hashedPassword = await hash(password, 8);
     const createdUser = await this.repository.create({
       driver_license,
