@@ -53,7 +53,7 @@ export class AuthenticateService implements IService<IReturn, IPayload> {
       email: user.email,
     };
     const token = sign(tokenPayload, process.env.JWT_SECRET, {
-      expiresIn: '900s', // 15min
+      expiresIn: process.env.JWT_EXPIRATION,
       subject: user.id,
     });
 
