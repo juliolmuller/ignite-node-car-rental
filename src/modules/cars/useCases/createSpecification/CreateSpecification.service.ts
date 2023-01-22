@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
+import { AppError } from '../../../../errors';
 import { IService } from '../../../../types';
 import { Specification } from '../../models';
 import { ISpecificationsRepository } from '../../repositories';
@@ -20,7 +21,7 @@ export class CreateSpecificationService implements IService<Specification, IPayl
     const specificationAlreadyExists = await this.repository.findByName(name);
 
     if (specificationAlreadyExists) {
-      throw new Error('Specification already exists');
+      throw new AppError('Specification already exists');
     }
 
     const createdSpecification = await this.repository.create({ name, description });

@@ -1,6 +1,7 @@
 import { RequestHandler } from 'express';
 import { verify } from 'jsonwebtoken';
 
+import { AppError } from '../errors';
 import { User } from '../modules/auth/models';
 
 export interface IJWTPayload {
@@ -13,14 +14,14 @@ export function authMiddleware(): RequestHandler {
     const authToken = /^Bearer (?<token>[^ $]*)$/.exec(authHeader)?.groups?.token;
 
     if (!authToken) {
-      throw new Error('No token provided');
+      throw new AppError('No token provided', 401);
     }
 
     try {
       verify(authToken, process.env.JWT_SECRET) as IJWTPayload;
       next();
     } catch {
-      throw new Error('Invalid authorization token');
+      throw new AppError('Invalid authorization token', 401);
     }
   };
 }

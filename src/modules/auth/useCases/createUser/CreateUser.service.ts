@@ -1,6 +1,7 @@
 import { hash } from 'bcrypt';
 import { inject, injectable } from 'tsyringe';
 
+import { AppError } from '../../../../errors';
 import { IService } from '../../../../types';
 import { User } from '../../models';
 import { IUsersRepository } from '../../repositories';
@@ -23,7 +24,7 @@ export class CreateUserService implements IService<User, IPayload> {
     const emailAlreadyExists = await this.repository.findByEmail(email);
 
     if (emailAlreadyExists) {
-      throw new Error('Email already exists');
+      throw new AppError('Email already exists');
     }
 
     const hashedPassword = await hash(password, 8);

@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import swagger from 'swagger-ui-express';
 
 import './container';
+import { errorHandler } from './errors';
 import { authRoutes, categoriesRoutes, specificationsRoutes, usersRoutes } from './routes';
 import swaggerConfig from './swagger.json';
 
@@ -21,3 +22,5 @@ app.use('/api/v1', authRoutes);
 app.use('/api/v1', categoriesRoutes);
 app.use('/api/v1', specificationsRoutes);
 app.use('/api/v1', usersRoutes);
+
+app.use(errorHandler);

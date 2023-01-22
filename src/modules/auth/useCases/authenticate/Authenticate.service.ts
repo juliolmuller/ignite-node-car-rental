@@ -2,6 +2,7 @@ import { compareSync } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 
+import { AppError } from '../../../../errors';
 import { IService } from '../../../../types';
 import { User } from '../../models';
 import { IUsersRepository } from '../../repositories';
@@ -28,7 +29,7 @@ export class AuthenticateService implements IService<IReturn, IPayload> {
     const isPasswordValid = Boolean(user) && compareSync(password, user.password);
 
     if (!user || !isPasswordValid) {
-      throw new Error('Incorrect email or password');
+      throw new AppError('Incorrect email or password');
     }
 
     const tokenPayload: IReturn['user'] = {
