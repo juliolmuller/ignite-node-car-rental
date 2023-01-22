@@ -13,14 +13,25 @@ export interface IPayload {
   driver_license: string;
 }
 
+export interface IResponse {
+  id: User['id'];
+  name: User['name'];
+  email: User['email'];
+  is_admin: User['is_admin'];
+  driver_license: User['driver_license'];
+  created_at: User['created_at'];
+  updated_at: User['updated_at'];
+  password?: never;
+}
+
 @injectable()
-export class CreateUserService implements IService<User, IPayload> {
+export class CreateUserService implements IService<IResponse, IPayload> {
   constructor(
     @inject('UsersRepository')
     private repository: IUsersRepository
   ) {}
 
-  async execute({ driver_license, email, name, password }: IPayload): Promise<User> {
+  async execute({ driver_license, email, name, password }: IPayload): Promise<IResponse> {
     const emailAlreadyExists = await this.repository.findByEmail(email);
 
     if (emailAlreadyExists) {
@@ -28,7 +39,8 @@ export class CreateUserService implements IService<User, IPayload> {
     }
 
     const hashedPassword = await hash(password, 8);
-    const createdUser = await this.repository.create({
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _, ...createdUser } = await this.repository.create({
       driver_license,
       email,
       name,

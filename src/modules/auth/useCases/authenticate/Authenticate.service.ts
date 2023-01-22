@@ -12,9 +12,24 @@ export interface IPayload {
   password: string;
 }
 
+export interface ITokenPayload {
+  id: string;
+  name: string;
+  email: string;
+}
+
 export interface IReturn {
   token: string;
-  user: Pick<User, 'id' | 'name' | 'email'>;
+  user: {
+    id: User['id'];
+    name: User['name'];
+    email: User['email'];
+    is_admin: User['is_admin'];
+    driver_license: User['driver_license'];
+    created_at: User['created_at'];
+    updated_at: User['updated_at'];
+    password?: never;
+  };
 }
 
 @injectable()
@@ -25,14 +40,14 @@ export class AuthenticateService implements IService<IReturn, IPayload> {
   ) {}
 
   async execute({ email, password }: IPayload): Promise<IReturn> {
-    const user = await this.repository.findByEmail(email);
-    const isPasswordValid = Boolean(user) && compareSync(password, user.password);
+    const { password: passwordHash, ...user } = await this.repository.findByEmail(email);
+    const isPasswordValid = Boolean(user) && compareSync(password, passwordHash);
 
     if (!user || !isPasswordValid) {
       throw new AppError('Incorrect email or password');
     }
 
-    const tokenPayload: IReturn['user'] = {
+    const tokenPayload: ITokenPayload = {
       id: user.id,
       name: user.name,
       email: user.email,
@@ -44,7 +59,7 @@ export class AuthenticateService implements IService<IReturn, IPayload> {
 
     return {
       token,
-      user: tokenPayload,
+      user,
     };
   }
 }
