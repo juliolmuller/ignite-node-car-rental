@@ -18,7 +18,8 @@ export function authMiddleware(): RequestHandler {
     }
 
     try {
-      verify(authToken, process.env.JWT_SECRET) as IJWTPayload;
+      const { sub: userId } = verify(authToken, process.env.JWT_SECRET) as IJWTPayload;
+      request.user = { id: userId };
       next();
     } catch {
       throw new AppError('Invalid authorization token', 401);

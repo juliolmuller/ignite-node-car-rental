@@ -13,10 +13,11 @@ export interface IPayload {
   driver_license: string;
 }
 
-export interface IResponse {
+export interface IResult {
   id: User['id'];
   name: User['name'];
   email: User['email'];
+  avatar?: User['avatar'];
   is_admin: User['is_admin'];
   driver_license: User['driver_license'];
   created_at: User['created_at'];
@@ -25,13 +26,13 @@ export interface IResponse {
 }
 
 @injectable()
-export class CreateUserService implements IService<IResponse, IPayload> {
+export class CreateUserService implements IService<IResult, IPayload> {
   constructor(
     @inject('UsersRepository')
     private repository: IUsersRepository
   ) {}
 
-  async execute({ driver_license, email, name, password }: IPayload): Promise<IResponse> {
+  async execute({ driver_license, email, name, password }: IPayload): Promise<IResult> {
     const emailAlreadyExists = await this.repository.findByEmail(email);
 
     if (emailAlreadyExists) {

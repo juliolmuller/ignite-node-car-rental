@@ -24,6 +24,7 @@ export interface IReturn {
     id: User['id'];
     name: User['name'];
     email: User['email'];
+    avatar?: User['avatar'];
     is_admin: User['is_admin'];
     driver_license: User['driver_license'];
     created_at: User['created_at'];
