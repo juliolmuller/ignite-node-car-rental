@@ -4,10 +4,10 @@ import express from 'express';
 import morgan from 'morgan';
 import swagger from 'swagger-ui-express';
 
-import './container';
-import { errorHandler } from './errors';
-import { authRoutes, categoriesRoutes, specificationsRoutes, usersRoutes } from './routes';
-import swaggerConfig from './swagger.json';
+import '~/container';
+import { errorHandler } from '~/errors';
+import { authRoutes, categoriesRoutes, specificationsRoutes, usersRoutes } from '~/routes';
+import swaggerConfig from '~/swagger.json';
 
 export const app = express();
 

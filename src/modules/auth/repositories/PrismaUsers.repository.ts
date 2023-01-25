@@ -1,5 +1,6 @@
-import { prisma } from '../../../database';
-import { User } from '../models';
+import { User } from '@/auth/models';
+import { prisma } from '~/database';
+
 import { IUsersRepository, ICreateUserDTO, IUpdateUserDTO } from './interfaces';
 
 export class PrismaUsersRepository implements IUsersRepository {

@@ -1,4 +1,5 @@
-import { Specification } from '../models';
+import { Specification } from '@/cars/models';
+
 import { ISpecificationsRepository, ICreateSpecificationDTO } from './interfaces';
 
 export class InMemorySpecificationsRepository implements ISpecificationsRepository {

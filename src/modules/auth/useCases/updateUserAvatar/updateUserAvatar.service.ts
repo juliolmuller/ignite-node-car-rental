@@ -1,10 +1,10 @@
 import { inject, injectable } from 'tsyringe';
 
-import { AppError } from '../../../../errors';
-import { IService } from '../../../../types';
-import { uploadUtils } from '../../../../utils';
-import { User } from '../../models';
-import { IUsersRepository } from '../../repositories';
+import { User } from '@/auth/models';
+import { IUsersRepository } from '@/auth/repositories';
+import { AppError } from '~/errors';
+import { IService } from '~/types';
+import { uploadUtils } from '~/utils';
 
 export interface IPayload {
   userAvatar: User['avatar'];

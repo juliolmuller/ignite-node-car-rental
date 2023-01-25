@@ -1,6 +1,8 @@
 import 'reflect-metadata';
-import { AppError } from '../../../../errors';
-import { InMemoryCategoriesRepository } from '../../repositories';
+
+import { InMemoryCategoriesRepository } from '@/cars/repositories';
+import { AppError } from '~/errors';
+
 import { CreateCategoryService } from './CreateCategory.service';
 
 describe('CreateCategoryService', () => {

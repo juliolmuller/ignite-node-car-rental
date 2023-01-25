@@ -1,5 +1,6 @@
-import { prisma } from '../../../database';
-import { Specification } from '../models';
+import { Specification } from '@/cars/models';
+import { prisma } from '~/database';
+
 import { ISpecificationsRepository, ICreateSpecificationDTO } from './interfaces';
 
 export class PrismaSpecificationsRepository implements ISpecificationsRepository {

@@ -2,10 +2,10 @@ import { compareSync } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 
-import { AppError } from '../../../../errors';
-import { IService } from '../../../../types';
-import { User } from '../../models';
-import { IUsersRepository } from '../../repositories';
+import { User } from '@/auth/models';
+import { IUsersRepository } from '@/auth/repositories';
+import { AppError } from '~/errors';
+import { IService } from '~/types';
 
 export interface IPayload {
   email: string;

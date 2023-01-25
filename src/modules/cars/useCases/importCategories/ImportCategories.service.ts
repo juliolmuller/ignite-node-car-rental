@@ -2,8 +2,8 @@ import { parse } from 'csv-parse';
 import fs from 'node:fs';
 import { inject, injectable } from 'tsyringe';
 
-import { IService } from '../../../../types';
-import { ICategoriesRepository } from '../../repositories';
+import { ICategoriesRepository } from '@/cars/repositories';
+import { IService } from '~/types';
 
 export type IPayload = Express.Multer.File;
 

@@ -1,5 +1,6 @@
-import { prisma } from '../../../database';
-import { Category } from '../models';
+import { Category } from '@/cars/models';
+import { prisma } from '~/database';
+
 import { ICategoriesRepository, ICreateCategoryDTO } from './interfaces';
 
 export class PrismaCategoriesRepository implements ICategoriesRepository {

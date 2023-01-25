@@ -1,8 +1,8 @@
 import { RequestHandler } from 'express';
 import { verify } from 'jsonwebtoken';
 
-import { AppError } from '../errors';
-import { User } from '../modules/auth/models';
+import { User } from '@/auth/models';
+import { AppError } from '~/errors';
 
 export interface IJWTPayload {
   sub: User['id'];

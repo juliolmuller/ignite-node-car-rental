@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 
-import { IService } from '../../../../types';
-import { Specification } from '../../models';
-import { ISpecificationsRepository } from '../../repositories';
+import { Specification } from '@/cars/models';
+import { ISpecificationsRepository } from '@/cars/repositories';
+import { IService } from '~/types';
 
 @injectable()
 export class ListSpecificationsService implements IService<Specification[]> {

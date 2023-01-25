@@ -51,11 +51,11 @@
         "order": "asc",
         "ignoreCase": true
       },
-      "groups": ["module", "/^@shared/", [
-        "parent",
-        "sibling",
-        "index"
-      ]],
+      "groups": [
+        "module", 
+        ["/^~//", "/^@//"], 
+        ["parent", "sibling", "index"]
+      ],
       "newlinesBetween": "always"
     }],
     "prettier/prettier": "warn",

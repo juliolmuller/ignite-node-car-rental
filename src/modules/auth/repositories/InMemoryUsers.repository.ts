@@ -1,4 +1,5 @@
-import { User } from '../models';
+import { User } from '@/auth/models';
+
 import { ICreateUserDTO, IUpdateUserDTO, IUsersRepository } from './interfaces';
 
 export class InMemoryUsersRepository implements IUsersRepository {

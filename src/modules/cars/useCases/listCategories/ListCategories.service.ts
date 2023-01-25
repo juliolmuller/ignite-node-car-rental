@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 
-import { IService } from '../../../../types';
-import { Category } from '../../models';
-import { ICategoriesRepository } from '../../repositories';
+import { Category } from '@/cars/models';
+import { ICategoriesRepository } from '@/cars/repositories';
+import { IService } from '~/types';
 
 @injectable()
 export class ListCategoriesService implements IService<Category[]> {

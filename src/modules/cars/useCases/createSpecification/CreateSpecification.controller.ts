@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { IController } from '../../../../types';
+import { IController } from '~/types';
+
 import { CreateSpecificationService } from './CreateSpecification.service';
 
 export class CreateSpecificationController implements IController {

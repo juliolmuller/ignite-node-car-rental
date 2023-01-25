@@ -1,6 +1,8 @@
 import 'reflect-metadata';
-import { AppError } from '../../../../errors';
-import { InMemorySpecificationsRepository } from '../../repositories';
+
+import { InMemorySpecificationsRepository } from '@/cars/repositories';
+import { AppError } from '~/errors';
+
 import { CreateSpecificationService } from './CreateSpecification.service';
 
 describe('CreateSpecificationService', () => {

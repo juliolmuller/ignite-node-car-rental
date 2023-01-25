@@ -1,10 +1,7 @@
 import { Router } from 'express';
 
-import { authMiddleware } from '../middlewares';
-import {
-  createSpecificationController,
-  listSpecificationsController,
-} from '../modules/cars/useCases';
+import { createSpecificationController, listSpecificationsController } from '@/cars/useCases';
+import { authMiddleware } from '~/middlewares';
 
 export const specificationsRoutes = Router();
 

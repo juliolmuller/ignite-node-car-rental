@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import multer from 'multer';
 
-import { uploadConfig } from '../config';
-import { authMiddleware } from '../middlewares';
 import {
   createCategoryController,
   importCategoriesController,
   listCategoriesController,
-} from '../modules/cars/useCases';
+} from '@/cars/useCases';
+import { uploadConfig } from '~/config';
+import { authMiddleware } from '~/middlewares';
 
 const uploadMiddleware = multer(uploadConfig.hash(process.env.STORAGE_TEMP_PATH));
 

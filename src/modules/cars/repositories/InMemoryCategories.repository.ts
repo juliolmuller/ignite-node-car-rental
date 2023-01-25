@@ -1,4 +1,5 @@
-import { Category } from '../models';
+import { Category } from '@/cars/models';
+
 import { ICategoriesRepository, ICreateCategoryDTO } from './interfaces';
 
 export class InMemoryCategoriesRepository implements ICategoriesRepository {

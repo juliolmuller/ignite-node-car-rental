@@ -1,9 +1,9 @@
 import { inject, injectable } from 'tsyringe';
 
-import { AppError } from '../../../../errors';
-import { IService } from '../../../../types';
-import { Specification } from '../../models';
-import { ISpecificationsRepository } from '../../repositories';
+import { Specification } from '@/cars/models';
+import { ISpecificationsRepository } from '@/cars/repositories';
+import { AppError } from '~/errors';
+import { IService } from '~/types';
 
 export interface IPayload {
   name: string;
