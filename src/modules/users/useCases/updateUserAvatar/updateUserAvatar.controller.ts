@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import { container } from 'tsyringe';
 
 import { IController } from '~/@types';
@@ -12,6 +13,6 @@ export class UpdateUserAvatarController implements IController {
     const userAvatar = request.file.filename;
     const user = await service.execute({ userId, userAvatar });
 
-    response.status(201).json(user);
+    response.status(StatusCodes.CREATED).json(user);
   }
 }

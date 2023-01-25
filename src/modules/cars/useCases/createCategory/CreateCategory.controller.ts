@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import { container } from 'tsyringe';
 
 import { IController } from '~/@types';
@@ -10,6 +11,6 @@ export class CreateCategoryController implements IController {
     const service = container.resolve(CreateCategoryService);
     const category = await service.execute(request.body);
 
-    response.status(201).json(category);
+    response.status(StatusCodes.CREATED).json(category);
   }
 }

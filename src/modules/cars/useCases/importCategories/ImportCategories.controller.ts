@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import { container } from 'tsyringe';
 
 import { IController } from '~/@types';
@@ -9,7 +10,7 @@ export class ImportCategoriesController implements IController {
   async handle(request: Request, response: Response) {
     const service = container.resolve(ImportCategoriesService);
     const result = await service.execute(request.file);
-    const status = result.success_count ? 201 : 400;
+    const status = result.success_count ? StatusCodes.CREATED : StatusCodes.UNPROCESSABLE_ENTITY;
 
     response.status(status).json(result);
   }

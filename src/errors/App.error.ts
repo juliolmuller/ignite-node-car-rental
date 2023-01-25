@@ -1,8 +1,11 @@
-export class AppError {
-  public readonly message: string;
-  public readonly statusCode: number;
+import { StatusCodes } from 'http-status-codes';
 
-  constructor(message: string, statusCode = 400) {
+export abstract class AppError extends Error {
+  public readonly message: string;
+  public readonly statusCode: StatusCodes;
+
+  constructor(message: string, statusCode: StatusCodes) {
+    super(message);
     this.message = message;
     this.statusCode = statusCode;
   }

@@ -5,7 +5,7 @@ import { inject, injectable } from 'tsyringe';
 import { User } from '@/users/models';
 import { IUsersRepository } from '@/users/repositories';
 import { IService } from '~/@types';
-import { AppError } from '~/errors';
+import { BadRequestError } from '~/errors';
 
 export interface IPayload {
   email: string;
@@ -45,7 +45,7 @@ export class AuthenticateService implements IService<IReturn, IPayload> {
     const isPasswordValid = Boolean(user?.password) && compareSync(password, user.password);
 
     if (!user || !isPasswordValid) {
-      throw new AppError('Incorrect email or password');
+      throw new BadRequestError('Incorrect email or password');
     }
 
     const tokenPayload: ITokenPayload = {

@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 
 import { InMemoryCategoriesRepository } from '@/cars/repositories';
-import { AppError } from '~/errors';
+import { UnprocessableEntityError } from '~/errors';
 
 import { CreateCategoryService } from './CreateCategory.service';
 
@@ -29,6 +29,6 @@ describe('CreateCategoryService', () => {
     const input2 = { name: 'Category X', description: 'Another description' };
     const servicePromise = createCategoryService.execute(input2);
 
-    expect(servicePromise).rejects.toBeInstanceOf(AppError);
+    expect(servicePromise).rejects.toBeInstanceOf(UnprocessableEntityError);
   });
 });

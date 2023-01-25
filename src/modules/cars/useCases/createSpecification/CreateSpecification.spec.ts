@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 
 import { InMemorySpecificationsRepository } from '@/cars/repositories';
-import { AppError } from '~/errors';
+import { UnprocessableEntityError } from '~/errors';
 
 import { CreateSpecificationService } from './CreateSpecification.service';
 
@@ -29,6 +29,6 @@ describe('CreateSpecificationService', () => {
     const input2 = { name: 'Specification X', description: 'Another description' };
     const servicePromise = createSpecificationService.execute(input2);
 
-    expect(servicePromise).rejects.toBeInstanceOf(AppError);
+    expect(servicePromise).rejects.toBeInstanceOf(UnprocessableEntityError);
   });
 });

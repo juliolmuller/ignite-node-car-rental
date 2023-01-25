@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { User } from '@/users/models';
 import { IUsersRepository } from '@/users/repositories';
 import { IService } from '~/@types';
-import { AppError } from '~/errors';
+import { NotFoundError } from '~/errors';
 import { uploadUtils } from '~/utils';
 
 export interface IPayload {
@@ -34,7 +34,7 @@ export class UpdateUserAvatarService implements IService<IResponse, IPayload> {
     const oldUser = await this.repository.findById(userId);
 
     if (!oldUser) {
-      throw new AppError(`User with ID "${userId}" not found`, 404);
+      throw new NotFoundError(`User with ID "${userId}" not found`);
     }
 
     const oldAvatar = oldUser.avatar;

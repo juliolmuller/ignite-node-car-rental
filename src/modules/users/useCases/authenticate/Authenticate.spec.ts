@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 
 import { InMemoryUsersRepository } from '@/users/repositories';
-import { AppError } from '~/errors';
+import { BadRequestError } from '~/errors';
 
 import { CreateUserService } from '../createUser/CreateUser.service';
 import { AuthenticateService } from './Authenticate.service';
@@ -37,13 +37,13 @@ describe('AuthenticateService', () => {
     const input = { email: 'incorrect@email.com', password: USER_PASSWORD };
     const servicePromise = authenticateService.execute(input);
 
-    expect(servicePromise).rejects.toBeInstanceOf(AppError);
+    expect(servicePromise).rejects.toBeInstanceOf(BadRequestError);
   });
 
   it('should fail authentication if password is incorrect', async () => {
     const input = { email: USER_EMAIL, password: '123456789' };
     const servicePromise = authenticateService.execute(input);
 
-    expect(servicePromise).rejects.toBeInstanceOf(AppError);
+    expect(servicePromise).rejects.toBeInstanceOf(BadRequestError);
   });
 });

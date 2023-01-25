@@ -2,7 +2,7 @@ import { RequestHandler } from 'express';
 import { verify } from 'jsonwebtoken';
 
 import { User } from '@/users/models';
-import { AppError } from '~/errors';
+import { UnauthorizedError } from '~/errors';
 
 export interface IJWTPayload {
   sub: User['id'];
@@ -14,7 +14,7 @@ export function ensureAuthenticatedMiddleware(): RequestHandler {
     const authToken = /^Bearer (?<token>[^ $]*)$/.exec(authHeader)?.groups?.token;
 
     if (!authToken) {
-      throw new AppError('No token provided', 401);
+      throw new UnauthorizedError('No token provided');
     }
 
     try {
@@ -22,7 +22,7 @@ export function ensureAuthenticatedMiddleware(): RequestHandler {
       request.user = { id: userId };
       next();
     } catch {
-      throw new AppError('Invalid authorization token', 401);
+      throw new UnauthorizedError('Invalid authorization token');
     }
   };
 }

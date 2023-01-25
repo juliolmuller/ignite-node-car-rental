@@ -4,7 +4,7 @@ import { inject, injectable } from 'tsyringe';
 import { User } from '@/users/models';
 import { IUsersRepository } from '@/users/repositories';
 import { IService } from '~/@types';
-import { AppError } from '~/errors';
+import { UnprocessableEntityError } from '~/errors';
 
 export interface IPayload {
   name: string;
@@ -36,7 +36,7 @@ export class CreateUserService implements IService<IResult, IPayload> {
     const emailAlreadyExists = await this.repository.findByEmail(email);
 
     if (emailAlreadyExists) {
-      throw new AppError('Email already exists');
+      throw new UnprocessableEntityError('Email already exists');
     }
 
     const hashedPassword = await hash(password, 8);

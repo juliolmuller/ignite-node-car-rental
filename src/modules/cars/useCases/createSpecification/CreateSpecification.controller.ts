@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import { container } from 'tsyringe';
 
 import { IController } from '~/@types';
@@ -10,6 +11,6 @@ export class CreateSpecificationController implements IController {
     const service = container.resolve(CreateSpecificationService);
     const specification = await service.execute(request.body);
 
-    response.status(201).json(specification);
+    response.status(StatusCodes.CREATED).json(specification);
   }
 }

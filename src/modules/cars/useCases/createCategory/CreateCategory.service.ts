@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { Category } from '@/cars/models';
 import { ICategoriesRepository } from '@/cars/repositories';
 import { IService } from '~/@types';
-import { AppError } from '~/errors';
+import { UnprocessableEntityError } from '~/errors';
 
 export interface IPayload {
   name: string;
@@ -21,7 +21,7 @@ export class CreateCategoryService implements IService<Category, IPayload> {
     const categoryAlreadyExists = await this.repository.findByName(name);
 
     if (categoryAlreadyExists) {
-      throw new AppError('Category already exists');
+      throw new UnprocessableEntityError('Category already exists');
     }
 
     const createdCategory = await this.repository.create({ name, description });
