@@ -8,17 +8,18 @@ datasource db {
 }
 
 model Category {
-  id          String   @id @default(uuid()) @db.VarChar(100)
+  id          String   @id @default(uuid()) @db.Uuid
   name        String   @db.VarChar(255)
   description String
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
+  Car         Car[]
 
   @@map("categories")
 }
 
 model Specification {
-  id          String   @id @default(uuid()) @db.VarChar(100)
+  id          String   @id @default(uuid()) @db.Uuid
   name        String   @db.VarChar(255)
   description String
   created_at  DateTime @default(now())
@@ -28,15 +29,32 @@ model Specification {
 }
 
 model User {
-  id             String   @id @default(uuid()) @db.VarChar(100)
+  id             String   @id @default(uuid()) @db.Uuid
   name           String   @db.VarChar(255)
   email          String   @unique @db.VarChar(255)
   password       String
   driver_license String   @db.VarChar(50)
   is_admin       Boolean  @default(false)
+  avatar         String?
   created_at     DateTime @default(now())
   updated_at     DateTime @updatedAt
-  avatar         String?
 
   @@map("users")
+}
+
+model Car {
+  id            String    @id @default(uuid()) @db.Uuid
+  name          String    @db.VarChar(255)
+  description   String?
+  brand         String    @db.VarChar(255)
+  category_id   String?   @db.Uuid
+  category      Category? @relation(fields: [category_id], references: [id], onUpdate: Cascade, onDelete: SetNull)
+  license_plate String    @db.VarChar(20)
+  available     Boolean   @default(true)
+  daily_rate    Float
+  fine_amount   Float
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+
+  @@map("cars")
 }
