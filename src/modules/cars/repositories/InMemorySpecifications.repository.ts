@@ -2,7 +2,7 @@ import { Specification } from '../models';
 import { ISpecificationsRepository, ICreateSpecificationDTO } from './interfaces';
 
 export class InMemorySpecificationsRepository implements ISpecificationsRepository {
-  private specifications: Specification[];
+  private specifications: Specification[] = [];
 
   async list(): Promise<Specification[]> {
     return this.specifications;
