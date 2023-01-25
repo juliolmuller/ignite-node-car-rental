@@ -2,7 +2,7 @@ import { User } from '../models';
 import { ICreateUserDTO, IUpdateUserDTO, IUsersRepository } from './interfaces';
 
 export class InMemoryUsersRepository implements IUsersRepository {
-  private users: User[];
+  private users: User[] = [];
 
   async create({ driver_license, email, name, password }: ICreateUserDTO): Promise<User> {
     const user = new User();

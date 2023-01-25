@@ -41,8 +41,8 @@ export class AuthenticateService implements IService<IReturn, IPayload> {
   ) {}
 
   async execute({ email, password }: IPayload): Promise<IReturn> {
-    const { password: passwordHash, ...user } = await this.repository.findByEmail(email);
-    const isPasswordValid = Boolean(user) && compareSync(password, passwordHash);
+    const user = await this.repository.findByEmail(email);
+    const isPasswordValid = Boolean(user?.password) && compareSync(password, user.password);
 
     if (!user || !isPasswordValid) {
       throw new AppError('Incorrect email or password');
@@ -60,7 +60,16 @@ export class AuthenticateService implements IService<IReturn, IPayload> {
 
     return {
       token,
-      user,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+        is_admin: user.is_admin,
+        driver_license: user.driver_license,
+        created_at: user.created_at,
+        updated_at: user.updated_at,
+      },
     };
   }
 }
