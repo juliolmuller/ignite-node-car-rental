@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import { InMemoryUsersRepository } from '@/auth/repositories';
+import { InMemoryUsersRepository } from '@/users/repositories';
 import { AppError } from '~/errors';
 
 import { CreateUserService } from '../createUser/CreateUser.service';

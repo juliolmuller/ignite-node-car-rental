@@ -1,14 +1,14 @@
 import { RequestHandler } from 'express';
 import { verify } from 'jsonwebtoken';
 
-import { User } from '@/auth/models';
+import { User } from '@/users/models';
 import { AppError } from '~/errors';
 
 export interface IJWTPayload {
   sub: User['id'];
 }
 
-export function authMiddleware(): RequestHandler {
+export function ensureAuthenticatedMiddleware(): RequestHandler {
   return (request, _response, next) => {
     const authHeader = request.headers.authorization;
     const authToken = /^Bearer (?<token>[^ $]*)$/.exec(authHeader)?.groups?.token;

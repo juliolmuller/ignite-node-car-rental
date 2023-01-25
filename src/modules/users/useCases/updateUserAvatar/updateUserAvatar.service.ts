@@ -1,9 +1,9 @@
 import { inject, injectable } from 'tsyringe';
 
-import { User } from '@/auth/models';
-import { IUsersRepository } from '@/auth/repositories';
+import { User } from '@/users/models';
+import { IUsersRepository } from '@/users/repositories';
+import { IService } from '~/@types';
 import { AppError } from '~/errors';
-import { IService } from '~/types';
 import { uploadUtils } from '~/utils';
 
 export interface IPayload {

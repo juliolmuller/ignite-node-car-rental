@@ -1,1 +1,1 @@
-export * from './auth.middleware';
+export * from './ensureAuthenticated.middleware';

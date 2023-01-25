@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { IController } from '~/types';
+import { IController } from '~/@types';
 
 import { CreateCategoryService } from './CreateCategory.service';
 

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import { inject, injectable } from 'tsyringe';
 
 import { ICategoriesRepository } from '@/cars/repositories';
-import { IService } from '~/types';
+import { IService } from '~/@types';
 
 export type IPayload = Express.Multer.File;
 

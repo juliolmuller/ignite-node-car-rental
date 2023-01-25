@@ -1,13 +1,13 @@
 import 'reflect-metadata';
 import { container } from 'tsyringe';
 
-import { IUsersRepository, PrismaUsersRepository } from '@/auth/repositories';
 import {
   ICategoriesRepository,
   ISpecificationsRepository,
   PrismaCategoriesRepository,
   PrismaSpecificationsRepository,
 } from '@/cars/repositories';
+import { IUsersRepository, PrismaUsersRepository } from '@/users/repositories';
 
 container.registerSingleton<ICategoriesRepository>(
   'CategoriesRepository',

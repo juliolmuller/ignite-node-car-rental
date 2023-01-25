@@ -2,8 +2,8 @@ import { inject, injectable } from 'tsyringe';
 
 import { Category } from '@/cars/models';
 import { ICategoriesRepository } from '@/cars/repositories';
+import { IService } from '~/@types';
 import { AppError } from '~/errors';
-import { IService } from '~/types';
 
 export interface IPayload {
   name: string;

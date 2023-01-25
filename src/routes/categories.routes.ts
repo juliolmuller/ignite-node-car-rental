@@ -7,13 +7,13 @@ import {
   listCategoriesController,
 } from '@/cars/useCases';
 import { uploadConfig } from '~/config';
-import { authMiddleware } from '~/middlewares';
+import { ensureAuthenticatedMiddleware } from '~/middlewares';
 
 const uploadMiddleware = multer(uploadConfig.hash(process.env.STORAGE_TEMP_PATH));
 
 export const categoriesRoutes = Router();
 
-categoriesRoutes.use(authMiddleware());
+categoriesRoutes.use(ensureAuthenticatedMiddleware());
 
 categoriesRoutes.get('/categories', listCategoriesController.handle);
 categoriesRoutes.post('/categories', createCategoryController.handle);

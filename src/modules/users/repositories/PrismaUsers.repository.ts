@@ -1,4 +1,4 @@
-import { User } from '@/auth/models';
+import { User } from '@/users/models';
 import { prisma } from '~/database';
 
 import { IUsersRepository, ICreateUserDTO, IUpdateUserDTO } from './interfaces';

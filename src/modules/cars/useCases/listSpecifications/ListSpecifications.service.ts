@@ -2,7 +2,7 @@ import { inject, injectable } from 'tsyringe';
 
 import { Specification } from '@/cars/models';
 import { ISpecificationsRepository } from '@/cars/repositories';
-import { IService } from '~/types';
+import { IService } from '~/@types';
 
 @injectable()
 export class ListSpecificationsService implements IService<Specification[]> {
