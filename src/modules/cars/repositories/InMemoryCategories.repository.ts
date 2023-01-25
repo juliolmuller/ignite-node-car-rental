@@ -2,7 +2,7 @@ import { Category } from '../models';
 import { ICategoriesRepository, ICreateCategoryDTO } from './interfaces';
 
 export class InMemoryCategoriesRepository implements ICategoriesRepository {
-  private categories: Category[];
+  private categories: Category[] = [];
 
   async list(): Promise<Category[]> {
     return this.categories;
