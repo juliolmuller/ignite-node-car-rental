@@ -5,7 +5,7 @@ import { uploadConfig } from '../config';
 import { authMiddleware } from '../middlewares';
 import { createUserController, updateUserAvatarController } from '../modules/auth/useCases';
 
-const uploadMiddleware = multer(uploadConfig.prefixed(`./${process.env.STORAGE_AVATAR_PATH}`));
+const uploadMiddleware = multer(uploadConfig.prefixed(process.env.STORAGE_AVATAR_PATH));
 
 export const usersRoutes = Router();
 

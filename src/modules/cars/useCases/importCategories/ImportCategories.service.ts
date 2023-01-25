@@ -10,8 +10,8 @@ export type IPayload = Express.Multer.File;
 export type IResult = {
   success_count: number;
   failure_count: number;
-  unsaved_records?: Array<{
-    error: string;
+  errors?: Array<{
+    message: string;
     data: {
       description?: string;
       name?: string;
@@ -28,7 +28,7 @@ export class ImportCategoriesService implements IService<IResult, IPayload> {
 
   async execute(file: IPayload): Promise<IResult> {
     const parser = parse();
-    const unsavedRecords: IResult['unsaved_records'] = [];
+    const unsavedRecords: IResult['errors'] = [];
     let successCount = 0;
 
     fs.createReadStream(file.path).pipe(parser);
@@ -36,7 +36,7 @@ export class ImportCategoriesService implements IService<IResult, IPayload> {
     for await (const [name, description] of parser) {
       if (!name) {
         unsavedRecords.push({
-          error: 'Field "name" cannot be empty.',
+          message: 'Field "name" cannot be empty.',
           data: { name, description },
         });
         continue;
@@ -44,7 +44,7 @@ export class ImportCategoriesService implements IService<IResult, IPayload> {
 
       if (!description) {
         unsavedRecords.push({
-          error: 'Field "description" cannot be empty.',
+          message: 'Field "description" cannot be empty.',
           data: { name, description },
         });
         continue;
@@ -52,7 +52,7 @@ export class ImportCategoriesService implements IService<IResult, IPayload> {
 
       if (await this.repository.findByName(name)) {
         unsavedRecords.push({
-          error: `Category with name "${name}" already exists.`,
+          message: `Category with name "${name}" already exists.`,
           data: { name, description },
         });
         continue;
@@ -65,7 +65,7 @@ export class ImportCategoriesService implements IService<IResult, IPayload> {
     return {
       success_count: successCount,
       failure_count: unsavedRecords.length,
-      unsaved_records: unsavedRecords.length ? unsavedRecords : undefined,
+      errors: unsavedRecords.length ? unsavedRecords : undefined,
     };
   }
 }

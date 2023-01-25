@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import multer from 'multer';
 
+import { uploadConfig } from '../config';
 import { authMiddleware } from '../middlewares';
 import {
   createCategoryController,
@@ -8,7 +9,7 @@ import {
   listCategoriesController,
 } from '../modules/cars/useCases';
 
-const upload = multer({ dest: './tmp' });
+const uploadMiddleware = multer(uploadConfig.hash(process.env.STORAGE_TEMP_PATH));
 
 export const categoriesRoutes = Router();
 
@@ -18,6 +19,6 @@ categoriesRoutes.get('/categories', listCategoriesController.handle);
 categoriesRoutes.post('/categories', createCategoryController.handle);
 categoriesRoutes.post(
   '/categories/import',
-  upload.single('file'),
+  uploadMiddleware.single('file'),
   importCategoriesController.handle
 );

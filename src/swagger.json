@@ -277,12 +277,12 @@
                     "failure_count": {
                       "type": "integer"
                     },
-                    "unsaved_records": {
+                    "errors": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "properties": {
-                          "error": {
+                          "message": {
                             "type": "string"
                           },
                           "data": {
@@ -317,12 +317,12 @@
                     "failure_count": {
                       "type": "integer"
                     },
-                    "unsaved_records": {
+                    "errors": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "properties": {
-                          "error": {
+                          "message": {
                             "type": "string"
                           },
                           "data": {
