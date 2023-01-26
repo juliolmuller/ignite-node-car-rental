@@ -31,6 +31,7 @@ export class InMemoryCarsRepository implements ICarsRepository {
       fine_amount,
       license_plate,
       name,
+      available: true,
       created_at: now,
       updated_at: now,
     });
