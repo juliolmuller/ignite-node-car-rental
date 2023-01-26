@@ -171,7 +171,7 @@
         }
       }
     },
-    "/api/v1/categories": {
+    "/api/v1/cars/categories": {
       "get": {
         "tags": [
           "Categories"
@@ -275,7 +275,7 @@
         }
       }
     },
-    "/api/v1/categories/import": {
+    "/api/v1/cars/categories/import": {
       "post": {
         "tags": [
           "Categories"
@@ -396,7 +396,7 @@
         }
       }
     },
-    "/api/v1/specifications": {
+    "/api/v1/cars/specifications": {
       "get": {
         "tags": [
           "Specifications"

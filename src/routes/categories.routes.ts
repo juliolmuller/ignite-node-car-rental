@@ -15,10 +15,10 @@ export const categoriesRoutes = Router();
 
 categoriesRoutes.use(ensureAuthenticatedMiddleware());
 
-categoriesRoutes.get('/categories', listCategoriesController.handle);
-categoriesRoutes.post('/categories', createCategoryController.handle);
+categoriesRoutes.get('/cars/categories', listCategoriesController.handle);
+categoriesRoutes.post('/cars/categories', createCategoryController.handle);
 categoriesRoutes.post(
-  '/categories/import',
+  '/cars/categories/import',
   uploadMiddleware.single('file'),
   importCategoriesController.handle
 );

@@ -7,5 +7,5 @@ export const specificationsRoutes = Router();
 
 specificationsRoutes.use(ensureAuthenticatedMiddleware());
 
-specificationsRoutes.get('/specifications', listSpecificationsController.handle);
-specificationsRoutes.post('/specifications', createSpecificationController.handle);
+specificationsRoutes.get('/cars/specifications', listSpecificationsController.handle);
+specificationsRoutes.post('/cars/specifications', createSpecificationController.handle);
