@@ -4,7 +4,7 @@ import express from 'express';
 import morgan from 'morgan';
 import swagger from 'swagger-ui-express';
 
-import '~/container';
+import '~/config/container';
 import { errorHandler } from '~/errors';
 import {
   authRoutes,
