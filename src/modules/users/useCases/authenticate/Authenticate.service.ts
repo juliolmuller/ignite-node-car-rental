@@ -16,6 +16,7 @@ export interface ITokenPayload {
   id: string;
   name: string;
   email: string;
+  is_admin: boolean;
 }
 
 export interface IReturn {
@@ -52,8 +53,9 @@ export class AuthenticateService implements IService<IReturn, IPayload> {
       id: user.id,
       name: user.name,
       email: user.email,
+      is_admin: user.is_admin,
     };
-    const token = sign(tokenPayload, process.env.JWT_SECRET, {
+    const token = sign({ payload: tokenPayload }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRATION,
       subject: user.id,
     });

@@ -1,11 +1,15 @@
 import { RequestHandler } from 'express';
 import { verify } from 'jsonwebtoken';
 
-import { User } from '@/users/models';
 import { UnauthorizedError } from '~/errors';
 
 export interface IJWTPayload {
-  sub: User['id'];
+  payload: {
+    id: string;
+    name: string;
+    email: string;
+    is_admin: boolean;
+  };
 }
 
 export function ensureAuth(): RequestHandler {
@@ -18,8 +22,8 @@ export function ensureAuth(): RequestHandler {
     }
 
     try {
-      const { sub: userId } = verify(authToken, process.env.JWT_SECRET) as IJWTPayload;
-      request.user = { id: userId };
+      const { payload: user } = verify(authToken, process.env.JWT_SECRET) as IJWTPayload;
+      request.user = user;
       next();
     } catch {
       throw new UnauthorizedError('Invalid authorization token');
