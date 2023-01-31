@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import { createSpecificationController, listSpecificationsController } from '@/cars/useCases';
-import { ensureAuth } from '~/middlewares';
+import { ensureAdmin, ensureAuth } from '~/middlewares';
 
 export const specificationsRoutes = Router();
 
@@ -9,5 +9,6 @@ specificationsRoutes.get('/cars/specifications', ensureAuth(), listSpecification
 specificationsRoutes.post(
   '/cars/specifications',
   ensureAuth(),
+  ensureAdmin(),
   createSpecificationController.handle
 );
