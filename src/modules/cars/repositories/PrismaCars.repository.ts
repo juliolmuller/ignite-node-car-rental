@@ -13,6 +13,7 @@ export class PrismaCarsRepository implements ICarsRepository {
   }
 
   async create({
+    available = true,
     brand,
     daily_rate,
     category_id,
@@ -22,9 +23,28 @@ export class PrismaCarsRepository implements ICarsRepository {
     name,
   }: ICreateCarDTO): Promise<Car> {
     const car = await prisma.car.create({
-      data: { brand, daily_rate, category_id, description, fine_amount, license_plate, name },
+      data: {
+        available,
+        brand,
+        daily_rate,
+        category_id,
+        description,
+        fine_amount,
+        license_plate,
+        name,
+      },
     });
 
     return car;
+  }
+
+  async listAvailable(): Promise<Car[]> {
+    const cars = await prisma.car.findMany({
+      where: {
+        available: true,
+      },
+    });
+
+    return cars;
   }
 }

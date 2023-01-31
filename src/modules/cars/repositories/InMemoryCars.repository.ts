@@ -12,6 +12,7 @@ export class InMemoryCarsRepository implements ICarsRepository {
   }
 
   async create({
+    available = true,
     brand,
     daily_rate,
     category_id,
@@ -24,6 +25,7 @@ export class InMemoryCarsRepository implements ICarsRepository {
     const now = new Date();
 
     Object.assign(car, {
+      available,
       brand,
       daily_rate,
       category_id,
@@ -31,7 +33,6 @@ export class InMemoryCarsRepository implements ICarsRepository {
       fine_amount,
       license_plate,
       name,
-      available: true,
       created_at: now,
       updated_at: now,
     });
@@ -39,5 +40,9 @@ export class InMemoryCarsRepository implements ICarsRepository {
     this.cars.push(car);
 
     return car;
+  }
+
+  async listAvailable(): Promise<Car[]> {
+    return this.cars.filter(({ available }) => available);
   }
 }

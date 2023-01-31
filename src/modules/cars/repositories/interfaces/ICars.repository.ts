@@ -7,10 +7,12 @@ export interface ICreateCarDTO {
   license_plate: string;
   daily_rate: number;
   fine_amount: number;
+  available?: boolean;
   category_id?: string;
 }
 
 export interface ICarsRepository {
   findByLicensePlate(licensePlate: string): Promise<Car | null>;
   create(payload: ICreateCarDTO): Promise<Car>;
+  listAvailable(): Promise<Car[]>;
 }
