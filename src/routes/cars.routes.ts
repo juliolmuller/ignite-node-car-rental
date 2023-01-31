@@ -1,10 +1,8 @@
 import { Router } from 'express';
 
 import { createCarController } from '@/cars/useCases';
-import { ensureAuthenticatedMiddleware } from '~/middlewares';
+import { ensureAuth } from '~/middlewares';
 
 export const carsRoutes = Router();
 
-carsRoutes.use(ensureAuthenticatedMiddleware());
-
-carsRoutes.post('/cars', createCarController.handle);
+carsRoutes.post('/cars', ensureAuth(), createCarController.handle);

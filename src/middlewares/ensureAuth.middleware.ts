@@ -8,7 +8,7 @@ export interface IJWTPayload {
   sub: User['id'];
 }
 
-export function ensureAuthenticatedMiddleware(): RequestHandler {
+export function ensureAuth(): RequestHandler {
   return (request, _response, next) => {
     const authHeader = request.headers.authorization;
     const authToken = /^Bearer (?<token>[^ $]*)$/.exec(authHeader)?.groups?.token;
