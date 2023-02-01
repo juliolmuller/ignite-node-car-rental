@@ -1,11 +1,11 @@
 -- CreateTable
 CREATE TABLE "cars" (
-    "id" UUID NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
     "description" TEXT,
-    "brand" VARCHAR(255) NOT NULL,
-    "category_id" UUID,
-    "license_plate" VARCHAR(20) NOT NULL,
+    "brand" TEXT NOT NULL,
+    "category_id" TEXT,
+    "license_plate" TEXT NOT NULL,
     "available" BOOLEAN NOT NULL DEFAULT true,
     "daily_rate" DOUBLE PRECISION NOT NULL,
     "fine_amount" DOUBLE PRECISION NOT NULL,

@@ -8,8 +8,8 @@ datasource db {
 }
 
 model Category {
-  id          String   @id @default(uuid()) @db.Uuid
-  name        String   @db.VarChar(255)
+  id          String   @id @default(uuid())
+  name        String
   description String
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
@@ -19,8 +19,8 @@ model Category {
 }
 
 model Specification {
-  id          String   @id @default(uuid()) @db.Uuid
-  name        String   @db.VarChar(255)
+  id          String   @id @default(uuid())
+  name        String
   description String
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
@@ -29,11 +29,11 @@ model Specification {
 }
 
 model User {
-  id             String   @id @default(uuid()) @db.Uuid
-  name           String   @db.VarChar(255)
-  email          String   @unique @db.VarChar(255)
+  id             String   @id @default(uuid())
+  name           String
+  email          String
   password       String
-  driver_license String   @db.VarChar(50)
+  driver_license String
   is_admin       Boolean  @default(false)
   avatar         String?
   created_at     DateTime @default(now())
@@ -43,13 +43,13 @@ model User {
 }
 
 model Car {
-  id            String    @id @default(uuid()) @db.Uuid
-  name          String    @db.VarChar(255)
+  id            String    @id @default(uuid())
+  name          String
   description   String?
-  brand         String    @db.VarChar(255)
-  category_id   String?   @db.Uuid
+  brand         String
+  category_id   String?
   category      Category? @relation(fields: [category_id], references: [id], onUpdate: Cascade, onDelete: SetNull)
-  license_plate String    @db.VarChar(20)
+  license_plate String
   available     Boolean   @default(true)
   daily_rate    Float
   fine_amount   Float
