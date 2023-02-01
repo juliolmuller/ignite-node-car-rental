@@ -1,7 +1,7 @@
 import { Car } from '@/cars/models';
 import { prisma } from '~/database';
 
-import { ICarsRepository, ICreateCarDTO } from './interfaces';
+import { ICarsRepository, ICreateCarDTO, IListCarsDTO } from './interfaces';
 
 export class PrismaCarsRepository implements ICarsRepository {
   async findByLicensePlate(licensePlate: string): Promise<Car | null> {
@@ -38,10 +38,25 @@ export class PrismaCarsRepository implements ICarsRepository {
     return car;
   }
 
-  async listAvailable(): Promise<Car[]> {
+  async list({ available, brand, category_id, name }: IListCarsDTO = {}): Promise<Car[]> {
     const cars = await prisma.car.findMany({
       where: {
-        available: true,
+        AND: [
+          { available },
+          { category_id },
+          {
+            brand: brand && {
+              contains: brand,
+              mode: 'insensitive',
+            },
+          },
+          {
+            name: name && {
+              contains: name,
+              mode: 'insensitive',
+            },
+          },
+        ],
       },
     });
 

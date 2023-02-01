@@ -213,6 +213,74 @@
       }
     },
     "/api/v1/cars": {
+      "get": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "List available cars",
+        "description": "",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "available",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "brand",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "category_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/car"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/error"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "Cars"
@@ -283,45 +351,6 @@
           },
           "422": {
             "description": "Validation errors",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/cars/available": {
-      "get": {
-        "tags": [
-          "Cars"
-        ],
-        "summary": "List available cars",
-        "description": "",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/car"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
             "content": {
               "application/json": {
                 "schema": {

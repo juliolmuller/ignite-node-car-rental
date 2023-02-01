@@ -11,8 +11,15 @@ export interface ICreateCarDTO {
   category_id?: string;
 }
 
+export interface IListCarsDTO {
+  available?: boolean;
+  name?: string;
+  brand?: string;
+  category_id?: string;
+}
+
 export interface ICarsRepository {
   findByLicensePlate(licensePlate: string): Promise<Car | null>;
-  create(payload: ICreateCarDTO): Promise<Car>;
-  listAvailable(): Promise<Car[]>;
+  create(dto: ICreateCarDTO): Promise<Car>;
+  list(dto?: IListCarsDTO): Promise<Car[]>;
 }

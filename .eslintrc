@@ -65,6 +65,7 @@
     "no-console": "off",
     "no-continue": "off",
     "no-empty-function": "off",
+    "no-nested-ternary": "off",
     "no-plusplus": "off",
     "no-restricted-syntax": "off",
     "no-shadow": "off",
