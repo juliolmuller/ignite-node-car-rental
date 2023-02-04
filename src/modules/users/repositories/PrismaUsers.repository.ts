@@ -4,10 +4,10 @@ import { prisma } from '~/database';
 import { IUsersRepository, ICreateUserDTO, IUpdateUserDTO } from './interfaces';
 
 export class PrismaUsersRepository implements IUsersRepository {
-  async create({ driver_license, email, name, password }: ICreateUserDTO): Promise<User> {
+  async create({ driverLicense, email, name, password }: ICreateUserDTO): Promise<User> {
     const user = await prisma.user.create({
       data: {
-        driver_license,
+        driverLicense,
         email,
         name,
         password,
@@ -19,11 +19,11 @@ export class PrismaUsersRepository implements IUsersRepository {
 
   async update(
     id: string,
-    { avatar, driver_license, email, name, password }: IUpdateUserDTO
+    { avatar, driverLicense, email, name, password }: IUpdateUserDTO
   ): Promise<User> {
     const user = await prisma.user.update({
       where: { id },
-      data: { avatar, driver_license, email, name, password },
+      data: { avatar, driverLicense, email, name, password },
     });
 
     return user || null;

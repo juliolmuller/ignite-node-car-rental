@@ -5,10 +5,10 @@ import { ICarsRepository, ICreateCarDTO, IListCarsDTO } from './interfaces';
 export class InMemoryCarsRepository implements ICarsRepository {
   private cars: Car[] = [];
 
-  async list({ available, brand, category_id, name }: IListCarsDTO = {}): Promise<Car[]> {
+  async list({ available, brand, categoryId, name }: IListCarsDTO = {}): Promise<Car[]> {
     return this.cars
       .filter((car) => typeof available === 'undefined' || car.available === available)
-      .filter((car) => typeof category_id === 'undefined' || car.category_id === category_id)
+      .filter((car) => typeof categoryId === 'undefined' || car.categoryId === categoryId)
       .filter((car) => typeof brand === 'undefined' || new RegExp(brand, 'i').test(car.brand))
       .filter((car) => typeof name === 'undefined' || new RegExp(name, 'i').test(car.name));
   }
@@ -20,7 +20,7 @@ export class InMemoryCarsRepository implements ICarsRepository {
   }
 
   async findByLicensePlate(licensePlate: string): Promise<Car | undefined> {
-    const car = this.cars.find((car) => car.license_plate === licensePlate);
+    const car = this.cars.find((car) => car.licensePlate === licensePlate);
 
     return car ?? undefined;
   }
@@ -28,11 +28,11 @@ export class InMemoryCarsRepository implements ICarsRepository {
   async create({
     available = true,
     brand,
-    daily_rate,
-    category_id,
+    dailyRate,
+    categoryId,
     description,
-    fine_amount,
-    license_plate,
+    fineAmount,
+    licensePlate,
     name,
   }: ICreateCarDTO): Promise<Car> {
     const car = new Car();
@@ -41,14 +41,14 @@ export class InMemoryCarsRepository implements ICarsRepository {
     Object.assign(car, {
       available,
       brand,
-      daily_rate,
-      category_id,
+      dailyRate,
+      categoryId,
       description,
-      fine_amount,
-      license_plate,
+      fineAmount,
+      licensePlate,
       name,
-      created_at: now,
-      updated_at: now,
+      createdAt: now,
+      updatedAt: now,
     });
 
     this.cars.push(car);

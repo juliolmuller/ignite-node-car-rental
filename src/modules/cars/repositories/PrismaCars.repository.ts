@@ -4,12 +4,12 @@ import { prisma } from '~/database';
 import { ICarsRepository, ICreateCarDTO, IListCarsDTO } from './interfaces';
 
 export class PrismaCarsRepository implements ICarsRepository {
-  async list({ available, brand, category_id, name }: IListCarsDTO = {}): Promise<Car[]> {
+  async list({ available, brand, categoryId, name }: IListCarsDTO = {}): Promise<Car[]> {
     const cars = await prisma.car.findMany({
       where: {
         AND: [
           { available },
-          { category_id },
+          { categoryId },
           {
             brand: brand && {
               contains: brand,
@@ -39,7 +39,7 @@ export class PrismaCarsRepository implements ICarsRepository {
 
   async findByLicensePlate(licensePlate: string): Promise<Car | undefined> {
     const car = await prisma.car.findFirst({
-      where: { license_plate: licensePlate },
+      where: { licensePlate },
     });
 
     return car ?? undefined;
@@ -48,22 +48,22 @@ export class PrismaCarsRepository implements ICarsRepository {
   async create({
     available = true,
     brand,
-    daily_rate,
-    category_id,
+    dailyRate,
+    categoryId,
     description,
-    fine_amount,
-    license_plate,
+    fineAmount,
+    licensePlate,
     name,
   }: ICreateCarDTO): Promise<Car> {
     const car = await prisma.car.create({
       data: {
         available,
         brand,
-        daily_rate,
-        category_id,
+        dailyRate,
+        categoryId,
         description,
-        fine_amount,
-        license_plate,
+        fineAmount,
+        licensePlate,
         name,
       },
     });
@@ -78,15 +78,13 @@ export class PrismaCarsRepository implements ICarsRepository {
     const [, ...output] = await prisma.$transaction([
       // delete all existing specifications assigned to given car
       prisma.carsSpecifications.deleteMany({
-        where: {
-          car_id: carId,
-        },
+        where: { carId },
       }),
       ...specifications.map(({ id: specId }) => {
         return prisma.carsSpecifications.create({
           data: {
-            specification_id: specId,
-            car_id: carId,
+            specificationId: specId,
+            carId,
           },
           include: {
             specification: true,
@@ -98,7 +96,7 @@ export class PrismaCarsRepository implements ICarsRepository {
     return output.map(
       (carSpecification): Specification => ({
         ...carSpecification.specification,
-        updated_at: carSpecification.assigned_at,
+        updatedAt: carSpecification.assignedAt,
       })
     );
   }

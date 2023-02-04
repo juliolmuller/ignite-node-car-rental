@@ -28,8 +28,8 @@ export class InMemoryCategoriesRepository implements ICategoriesRepository {
     Object.assign(category, {
       name,
       description,
-      created_at: now,
-      updated_at: now,
+      createdAt: now,
+      updatedAt: now,
     });
 
     this.categories.push(category);

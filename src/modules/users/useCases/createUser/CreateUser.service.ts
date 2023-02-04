@@ -10,7 +10,7 @@ export interface IPayload {
   name: string;
   email: string;
   password: string;
-  driver_license: string;
+  driverLicense: string;
 }
 
 export interface IResult {
@@ -18,10 +18,10 @@ export interface IResult {
   name: User['name'];
   email: User['email'];
   avatar?: User['avatar'];
-  is_admin: User['is_admin'];
-  driver_license: User['driver_license'];
-  created_at: User['created_at'];
-  updated_at: User['updated_at'];
+  isAdmin: User['isAdmin'];
+  driverLicense: User['driverLicense'];
+  createdAt: User['createdAt'];
+  updatedAt: User['updatedAt'];
   password?: never;
 }
 
@@ -32,7 +32,7 @@ export class CreateUserService implements IService<IResult, IPayload> {
     private repository: IUsersRepository
   ) {}
 
-  async execute({ driver_license, email, name, password }: IPayload): Promise<IResult> {
+  async execute({ driverLicense, email, name, password }: IPayload): Promise<IResult> {
     const emailAlreadyExists = await this.repository.findByEmail(email);
 
     if (emailAlreadyExists) {
@@ -42,7 +42,7 @@ export class CreateUserService implements IService<IResult, IPayload> {
     const hashedPassword = await hash(password, 8);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password: _, ...createdUser } = await this.repository.create({
-      driver_license,
+      driverLicense,
       email,
       name,
       password: hashedPassword,

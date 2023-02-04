@@ -11,63 +11,63 @@ model Category {
   id          String   @id @default(uuid())
   name        String
   description String
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
   car         Car[]
 
   @@map("categories")
 }
 
 model Specification {
-  id                  String               @id @default(uuid())
-  name                String
-  description         String
-  created_at          DateTime             @default(now())
-  updated_at          DateTime             @updatedAt
-  cars_specifications CarsSpecifications[]
+  id                 String               @id @default(uuid())
+  name               String
+  description        String
+  createdAt          DateTime             @default(now()) @map("created_at")
+  updatedAt          DateTime             @updatedAt @map("updated_at")
+  carsSpecifications CarsSpecifications[]
 
   @@map("specifications")
 }
 
 model User {
-  id             String   @id @default(uuid())
-  name           String
-  email          String
-  password       String
-  driver_license String
-  is_admin       Boolean  @default(false)
-  avatar         String?
-  created_at     DateTime @default(now())
-  updated_at     DateTime @updatedAt
+  id            String   @id @default(uuid())
+  name          String
+  email         String
+  password      String
+  driverLicense String   @map("driver_license")
+  isAdmin       Boolean  @default(false) @map("is_admin")
+  avatar        String?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
 
   @@map("users")
 }
 
 model Car {
-  id                  String               @id @default(uuid())
-  name                String
-  description         String?
-  brand               String
-  category_id         String?
-  category            Category?            @relation(fields: [category_id], references: [id], onUpdate: Cascade, onDelete: SetNull)
-  license_plate       String
-  available           Boolean              @default(true)
-  daily_rate          Float
-  fine_amount         Float
-  created_at          DateTime             @default(now())
-  updated_at          DateTime             @updatedAt
-  cars_specifications CarsSpecifications[]
+  id                 String               @id @default(uuid())
+  name               String
+  description        String?
+  brand              String
+  categoryId         String?              @map("category_id")
+  category           Category?            @relation(fields: [categoryId], references: [id], onUpdate: Cascade, onDelete: SetNull)
+  licensePlate       String               @map("license_plate")
+  available          Boolean              @default(true)
+  dailyRate          Float                @map("daily_rate")
+  fineAmount         Float                @map("fine_amount")
+  createdAt          DateTime             @default(now()) @map("created_at")
+  updatedAt          DateTime             @updatedAt @map("updated_at")
+  carsSpecifications CarsSpecifications[]
 
   @@map("cars")
 }
 
 model CarsSpecifications {
-  car_id           String
-  car              Car           @relation(fields: [car_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  specification_id String
-  specification    Specification @relation(fields: [specification_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  assigned_at      DateTime      @default(now())
+  carId           String        @map("car_id")
+  car             Car           @relation(fields: [carId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  specificationId String        @map("specification_id")
+  specification   Specification @relation(fields: [specificationId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  assignedAt      DateTime      @default(now()) @map("assigned_at")
 
-  @@id([car_id, specification_id])
+  @@id([carId, specificationId])
   @@map("cars_specifications")
 }

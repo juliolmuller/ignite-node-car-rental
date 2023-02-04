@@ -5,17 +5,17 @@ import { ICreateUserDTO, IUpdateUserDTO, IUsersRepository } from './interfaces';
 export class InMemoryUsersRepository implements IUsersRepository {
   private users: User[] = [];
 
-  async create({ driver_license, email, name, password }: ICreateUserDTO): Promise<User> {
+  async create({ driverLicense, email, name, password }: ICreateUserDTO): Promise<User> {
     const user = new User();
     const now = new Date();
 
     Object.assign(user, {
-      driver_license,
+      driverLicense,
       email,
       name,
       password,
-      created_at: now,
-      updated_at: now,
+      createdAt: now,
+      updatedAt: now,
     });
 
     this.users.push(user);
@@ -25,7 +25,7 @@ export class InMemoryUsersRepository implements IUsersRepository {
 
   async update(
     id: string,
-    { avatar, driver_license, email, name, password }: IUpdateUserDTO
+    { avatar, driverLicense, email, name, password }: IUpdateUserDTO
   ): Promise<User> {
     const user = this.users.find((user) => user.id === id);
     const now = new Date();
@@ -38,8 +38,8 @@ export class InMemoryUsersRepository implements IUsersRepository {
     user.email = email === undefined ? user.email : email;
     user.avatar = avatar === undefined ? user.avatar : avatar;
     user.password = password === undefined ? user.password : password;
-    user.driver_license = driver_license === undefined ? user.driver_license : driver_license;
-    user.updated_at = now;
+    user.driverLicense = driverLicense === undefined ? user.driverLicense : driverLicense;
+    user.updatedAt = now;
 
     return user;
   }

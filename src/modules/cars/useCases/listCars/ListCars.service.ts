@@ -6,7 +6,7 @@ import { IService } from '~/@types';
 
 export interface IPayload {
   available?: boolean;
-  category_id?: string;
+  categoryId?: string;
   name?: string;
 }
 

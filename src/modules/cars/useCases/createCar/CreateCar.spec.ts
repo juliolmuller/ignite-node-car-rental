@@ -27,10 +27,10 @@ describe('CreateCarService', () => {
       name: 'New Car',
       description: 'An awesome description',
       brand: 'Ferrari',
-      license_plate: 'ABC1234',
-      daily_rate: 600,
-      fine_amount: 50,
-      category_id: category.id,
+      licensePlate: 'ABC1234',
+      dailyRate: 600,
+      fineAmount: 50,
+      categoryId: category.id,
     };
     const output = await createCarService.execute(input);
 
@@ -43,9 +43,9 @@ describe('CreateCarService', () => {
       name: 'Car X',
       description: 'An awesome description',
       brand: 'Ferrari',
-      license_plate: 'ABC1234',
-      daily_rate: 600,
-      fine_amount: 50,
+      licensePlate: 'ABC1234',
+      dailyRate: 600,
+      fineAmount: 50,
     };
     await createCarService.execute(input1);
 
@@ -53,9 +53,9 @@ describe('CreateCarService', () => {
       name: 'Car Y',
       description: 'Another description',
       brand: 'Ford',
-      license_plate: 'ABC1234',
-      daily_rate: 500,
-      fine_amount: 40,
+      licensePlate: 'ABC1234',
+      dailyRate: 500,
+      fineAmount: 40,
     };
     const servicePromise = createCarService.execute(input2);
 
@@ -67,10 +67,10 @@ describe('CreateCarService', () => {
       name: 'New Car',
       description: 'An awesome description',
       brand: 'Ferrari',
-      license_plate: 'ABC1234',
-      daily_rate: 600,
-      fine_amount: 50,
-      category_id: 'NON-SENSE UUID',
+      licensePlate: 'ABC1234',
+      dailyRate: 600,
+      fineAmount: 50,
+      categoryId: 'NON-SENSE UUID',
     };
     const servicePromise = createCarService.execute(input);
 

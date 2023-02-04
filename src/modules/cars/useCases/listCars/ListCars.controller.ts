@@ -8,7 +8,7 @@ import { ListCarsService } from './ListCars.service';
 export class ListCarsController implements IController {
   async handle(request: Request, response: Response) {
     const rawAvailable = request.query.available;
-    const rawCategoryId = request.query.category_id;
+    const rawCategoryId = request.query.categoryId;
     const rawBrand = request.query.brand;
     const rawName = request.query.name;
     const parsedParams = {
@@ -30,7 +30,7 @@ export class ListCarsController implements IController {
           : Array.isArray(rawBrand)
           ? rawBrand[0].toString()
           : rawBrand.toString(),
-      category_id:
+      categoryId:
         typeof rawCategoryId === 'undefined'
           ? undefined
           : Array.isArray(rawCategoryId)

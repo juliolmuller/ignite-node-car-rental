@@ -10,7 +10,7 @@ export class ImportCategoriesController implements IController {
   async handle(request: Request, response: Response) {
     const service = container.resolve(ImportCategoriesService);
     const result = await service.execute(request.file);
-    const status = result.success_count ? StatusCodes.CREATED : StatusCodes.UNPROCESSABLE_ENTITY;
+    const status = result.successCount ? StatusCodes.CREATED : StatusCodes.UNPROCESSABLE_ENTITY;
 
     response.status(status).json(result);
   }

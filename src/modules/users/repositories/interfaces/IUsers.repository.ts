@@ -4,7 +4,7 @@ export interface ICreateUserDTO {
   name: string;
   email: string;
   password: string;
-  driver_license: string;
+  driverLicense: string;
 }
 
 export interface IUpdateUserDTO {
@@ -12,7 +12,7 @@ export interface IUpdateUserDTO {
   email?: string;
   avatar?: string | null;
   password?: string;
-  driver_license?: string;
+  driverLicense?: string;
 }
 
 export interface IUsersRepository {

@@ -4,18 +4,18 @@ export interface ICreateCarDTO {
   name: string;
   description: string;
   brand: string;
-  license_plate: string;
-  daily_rate: number;
-  fine_amount: number;
+  licensePlate: string;
+  dailyRate: number;
+  fineAmount: number;
   available?: boolean;
-  category_id?: string;
+  categoryId?: string;
 }
 
 export interface IListCarsDTO {
   available?: boolean;
   name?: string;
   brand?: string;
-  category_id?: string;
+  categoryId?: string;
 }
 
 export interface ICarsRepository {

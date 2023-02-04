@@ -6,10 +6,10 @@ export class User {
   email: string;
   avatar?: string;
   password: string;
-  driver_license: string;
-  is_admin: boolean;
-  created_at: Date;
-  updated_at: Date;
+  driverLicense: string;
+  isAdmin: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 
   constructor() {
     if (!this.id) {

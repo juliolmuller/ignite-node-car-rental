@@ -25,49 +25,49 @@ describe('ListCarsService', () => {
         name: 'Car 1',
         description: 'Random description.',
         brand: 'Ford',
-        license_plate: 'AAA-0001',
-        category_id: category.id,
+        licensePlate: 'AAA-0001',
+        categoryId: category.id,
         available: true,
-        daily_rate: 500,
-        fine_amount: 50,
+        dailyRate: 500,
+        fineAmount: 50,
       },
       {
         name: 'Car 2',
         description: 'Random description.',
         brand: 'Ford',
-        license_plate: 'AAA-0002',
-        category_id: category.id,
+        licensePlate: 'AAA-0002',
+        categoryId: category.id,
         available: false,
-        daily_rate: 500,
-        fine_amount: 50,
+        dailyRate: 500,
+        fineAmount: 50,
       },
       {
         name: 'Car 3',
         description: 'Random description.',
         brand: 'Ford',
-        license_plate: 'AAA-0003',
+        licensePlate: 'AAA-0003',
         available: true,
-        daily_rate: 500,
-        fine_amount: 50,
+        dailyRate: 500,
+        fineAmount: 50,
       },
       {
         name: 'Vehicle A',
         description: 'Random description.',
         brand: 'Ford',
-        license_plate: 'AAA-0004',
-        category_id: category.id,
+        licensePlate: 'AAA-0004',
+        categoryId: category.id,
         available: false,
-        daily_rate: 500,
-        fine_amount: 50,
+        dailyRate: 500,
+        fineAmount: 50,
       },
       {
         name: 'Vehicle B',
         description: 'Random description.',
         brand: 'Ford',
-        license_plate: 'AAA-0005',
+        licensePlate: 'AAA-0005',
         available: true,
-        daily_rate: 500,
-        fine_amount: 50,
+        dailyRate: 500,
+        fineAmount: 50,
       },
     ];
 
@@ -93,7 +93,7 @@ describe('ListCarsService', () => {
   });
 
   it('should list ONLY cars with given category', async () => {
-    const output = await listCarService.execute({ category_id: category.id });
+    const output = await listCarService.execute({ categoryId: category.id });
 
     expect(output).toHaveLength(3);
   });

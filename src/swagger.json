@@ -48,26 +48,26 @@
         "brand": {
           "type": "string"
         },
-        "license_plate": {
+        "licensePlate": {
           "type": "string"
         },
         "available": {
           "type": "boolean"
         },
-        "daily_rate": {
+        "dailyRate": {
           "type": "number"
         },
-        "fine_amount": {
+        "fineAmount": {
           "type": "number"
         },
-        "category_id": {
+        "categoryId": {
           "type": "string"
         },
-        "created_at": {
+        "createdAt": {
           "type": "string",
           "format": "date-time"
         },
-        "updated_at": {
+        "updatedAt": {
           "type": "string",
           "format": "date-time"
         }
@@ -86,11 +86,11 @@
         "description": {
           "type": "string"
         },
-        "created_at": {
+        "createdAt": {
           "type": "string",
           "format": "date-time"
         },
-        "updated_at": {
+        "updatedAt": {
           "type": "string",
           "format": "date-time"
         }
@@ -109,11 +109,11 @@
         "description": {
           "type": "string"
         },
-        "created_at": {
+        "createdAt": {
           "type": "string",
           "format": "date-time"
         },
-        "updated_at": {
+        "updatedAt": {
           "type": "string",
           "format": "date-time"
         }
@@ -133,17 +133,17 @@
           "type": "string",
           "format": "email"
         },
-        "driver_license": {
+        "driverLicense": {
           "type": "string"
         },
-        "is_admin": {
+        "isAdmin": {
           "type": "boolean"
         },
-        "created_at": {
+        "createdAt": {
           "type": "string",
           "format": "date-time"
         },
-        "updated_at": {
+        "updatedAt": {
           "type": "string",
           "format": "date-time"
         }
@@ -248,7 +248,7 @@
           },
           {
             "in": "query",
-            "name": "category_id",
+            "name": "categoryId",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -307,16 +307,16 @@
                   "brand": {
                     "type": "string"
                   },
-                  "license_plate": {
+                  "licensePlate": {
                     "type": "string"
                   },
-                  "daily_rate": {
+                  "dailyRate": {
                     "type": "number"
                   },
-                  "fine_amount": {
+                  "fineAmount": {
                     "type": "number"
                   },
-                  "category_id": {
+                  "categoryId": {
                     "type": "string"
                   }
                 },
@@ -590,10 +590,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "success_count": {
+                    "successCount": {
                       "type": "integer"
                     },
-                    "failure_count": {
+                    "failureCount": {
                       "type": "integer"
                     },
                     "errors": {
@@ -640,10 +640,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "success_count": {
+                    "successCount": {
                       "type": "integer"
                     },
-                    "failure_count": {
+                    "failureCount": {
                       "type": "integer"
                     },
                     "errors": {
@@ -808,7 +808,7 @@
                   "password": {
                     "type": "string"
                   },
-                  "driver_license": {
+                  "driverLicense": {
                     "type": "string"
                   }
                 },
@@ -816,7 +816,7 @@
                   "name": "John Doe",
                   "email": "john.doe@email.com",
                   "password": "Qwerty123",
-                  "driver_license": "123456789"
+                  "driverLicense": "123456789"
                 }
               }
             }

@@ -16,7 +16,7 @@ export interface ITokenPayload {
   id: string;
   name: string;
   email: string;
-  is_admin: boolean;
+  isAdmin: boolean;
 }
 
 export interface IReturn {
@@ -26,10 +26,10 @@ export interface IReturn {
     name: User['name'];
     email: User['email'];
     avatar?: User['avatar'];
-    is_admin: User['is_admin'];
-    driver_license: User['driver_license'];
-    created_at: User['created_at'];
-    updated_at: User['updated_at'];
+    isAdmin: User['isAdmin'];
+    driverLicense: User['driverLicense'];
+    createdAt: User['createdAt'];
+    updatedAt: User['updatedAt'];
     password?: never;
   };
 }
@@ -53,7 +53,7 @@ export class AuthenticateService implements IService<IReturn, IPayload> {
       id: user.id,
       name: user.name,
       email: user.email,
-      is_admin: user.is_admin,
+      isAdmin: user.isAdmin,
     };
     const token = sign({ payload: tokenPayload }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRATION,
@@ -67,10 +67,10 @@ export class AuthenticateService implements IService<IReturn, IPayload> {
         name: user.name,
         email: user.email,
         avatar: user.avatar,
-        is_admin: user.is_admin,
-        driver_license: user.driver_license,
-        created_at: user.created_at,
-        updated_at: user.updated_at,
+        isAdmin: user.isAdmin,
+        driverLicense: user.driverLicense,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
       },
     };
   }

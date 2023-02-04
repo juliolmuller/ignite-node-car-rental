@@ -7,14 +7,14 @@ export class Car {
   name: string;
   description: string;
   brand: string;
-  license_plate: string;
+  licensePlate: string;
   available: boolean;
-  daily_rate: number;
-  fine_amount: number;
-  category_id?: string;
+  dailyRate: number;
+  fineAmount: number;
+  categoryId?: string;
   specifications?: Specification[];
-  created_at: Date;
-  updated_at: Date;
+  createdAt: Date;
+  updatedAt: Date;
 
   constructor() {
     if (!this.id) {

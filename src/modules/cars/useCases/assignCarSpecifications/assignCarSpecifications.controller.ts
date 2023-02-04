@@ -8,10 +8,10 @@ import { AssignCarSpecificationsService } from './assignCarSpecifications.servic
 
 export class AssignCarSpecificationsController implements IController {
   async handle(request: Request, response: Response) {
-    const car_id = request.params.carId as string;
-    const specifications_ids = request.body;
+    const carId = request.params.carId as string;
+    const specificationsIds = request.body;
     const service = container.resolve(AssignCarSpecificationsService);
-    const car = await service.execute({ car_id, specifications_ids });
+    const car = await service.execute({ carId, specificationsIds });
 
     response.status(StatusCodes.OK).json(car);
   }

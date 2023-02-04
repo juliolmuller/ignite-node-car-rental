@@ -1,5 +1,4 @@
 import { inject, injectable } from 'tsyringe';
-import { validate } from 'uuid';
 
 import { Car } from '@/cars/models';
 import { ICarsRepository, ICategoriesRepository } from '@/cars/repositories';
@@ -10,10 +9,10 @@ export interface IPayload {
   name: string;
   description: string;
   brand: string;
-  license_plate: string;
-  daily_rate: number;
-  fine_amount: number;
-  category_id?: string;
+  licensePlate: string;
+  dailyRate: number;
+  fineAmount: number;
+  categoryId?: string;
 }
 
 @injectable()
@@ -29,32 +28,32 @@ export class CreateCarService implements IService<Car, IPayload> {
   async execute({
     name,
     brand,
-    category_id,
-    daily_rate,
+    categoryId,
+    dailyRate,
     description,
-    fine_amount,
-    license_plate,
+    fineAmount,
+    licensePlate,
   }: IPayload): Promise<Car> {
-    const category = await this.categoryRepository.find(category_id);
+    const category = await this.categoryRepository.find(categoryId);
 
-    if (category_id && !category) {
-      throw new UnprocessableEntityError(`Category with ID "${category_id}" does not exists`);
+    if (categoryId && !category) {
+      throw new UnprocessableEntityError(`Category with ID "${categoryId}" does not exists`);
     }
 
-    const carAlreadyExists = await this.repository.findByLicensePlate(license_plate);
+    const carAlreadyExists = await this.repository.findByLicensePlate(licensePlate);
 
     if (carAlreadyExists) {
-      throw new UnprocessableEntityError(`License plate "${license_plate}" already exists`);
+      throw new UnprocessableEntityError(`License plate "${licensePlate}" already exists`);
     }
 
     const createdCar = await this.repository.create({
       name,
       brand,
-      daily_rate,
+      dailyRate,
       description,
-      fine_amount,
-      license_plate,
-      category_id: category_id || undefined,
+      fineAmount,
+      licensePlate,
+      categoryId: categoryId || undefined,
     });
 
     return createdCar;

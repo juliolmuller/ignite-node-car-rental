@@ -16,10 +16,10 @@ export interface IResponse {
   name: User['name'];
   email: User['email'];
   avatar?: User['avatar'];
-  is_admin: User['is_admin'];
-  driver_license: User['driver_license'];
-  created_at: User['created_at'];
-  updated_at: User['updated_at'];
+  isAdmin: User['isAdmin'];
+  driverLicense: User['driverLicense'];
+  createdAt: User['createdAt'];
+  updatedAt: User['updatedAt'];
   password?: never;
 }
 
@@ -50,10 +50,10 @@ export class UpdateUserAvatarService implements IService<IResponse, IPayload> {
       name: updatedUser.name,
       email: updatedUser.email,
       avatar: updatedUser.avatar,
-      is_admin: updatedUser.is_admin,
-      driver_license: updatedUser.driver_license,
-      created_at: updatedUser.created_at,
-      updated_at: updatedUser.updated_at,
+      isAdmin: updatedUser.isAdmin,
+      driverLicense: updatedUser.driverLicense,
+      createdAt: updatedUser.createdAt,
+      updatedAt: updatedUser.updatedAt,
     };
   }
 }

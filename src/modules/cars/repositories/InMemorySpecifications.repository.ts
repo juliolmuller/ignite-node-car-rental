@@ -36,8 +36,8 @@ export class InMemorySpecificationsRepository implements ISpecificationsReposito
     Object.assign(specification, {
       name,
       description,
-      created_at: now,
-      updated_at: now,
+      createdAt: now,
+      updatedAt: now,
     });
 
     this.specifications.push(specification);

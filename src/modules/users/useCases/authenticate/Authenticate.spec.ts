@@ -22,7 +22,7 @@ describe('AuthenticateService', () => {
       name: 'Dummy User',
       email: USER_EMAIL,
       password: USER_PASSWORD,
-      driver_license: '123456789',
+      driverLicense: '123456789',
     });
   });
 

@@ -22,9 +22,9 @@ describe('AssignCarSpecificationsService', () => {
       name: 'New Car',
       description: 'An awesome description',
       brand: 'Carros',
-      license_plate: 'ABC1234',
-      daily_rate: 600,
-      fine_amount: 50,
+      licensePlate: 'ABC1234',
+      dailyRate: 600,
+      fineAmount: 50,
     });
     await specificationsRepository.create({
       name: 'Specification 1',
@@ -44,8 +44,8 @@ describe('AssignCarSpecificationsService', () => {
     const [car] = await carsRepository.list();
     const specifications = await specificationsRepository.list();
     const input = {
-      car_id: car.id,
-      specifications_ids: specifications.map(({ id }) => id),
+      carId: car.id,
+      specificationsIds: specifications.map(({ id }) => id),
     };
     const output = await assignCarSpecificationsService.execute(input);
 
@@ -60,8 +60,8 @@ describe('AssignCarSpecificationsService', () => {
   it('throws an error if car ID is not UUID', async () => {
     const specifications = await specificationsRepository.list();
     const input = {
-      car_id: 'not.an.uuid',
-      specifications_ids: specifications.map(({ id }) => id),
+      carId: 'not.an.uuid',
+      specificationsIds: specifications.map(({ id }) => id),
     };
     const promise = assignCarSpecificationsService.execute(input);
 
@@ -72,8 +72,8 @@ describe('AssignCarSpecificationsService', () => {
     const [car] = await carsRepository.list();
     const specifications = await specificationsRepository.list();
     const input = {
-      car_id: car.id,
-      specifications_ids: specifications.map(({ id }) => id).concat(['not.an.uuid']),
+      carId: car.id,
+      specificationsIds: specifications.map(({ id }) => id).concat(['not.an.uuid']),
     };
     const promise = assignCarSpecificationsService.execute(input);
 
@@ -83,8 +83,8 @@ describe('AssignCarSpecificationsService', () => {
   it('throws an error if car is not found', async () => {
     const specifications = await specificationsRepository.list();
     const input = {
-      car_id: '09650622-bb81-4a03-9ec6-622fa4f234aa',
-      specifications_ids: specifications.map(({ id }) => id),
+      carId: '09650622-bb81-4a03-9ec6-622fa4f234aa',
+      specificationsIds: specifications.map(({ id }) => id),
     };
     const promise = assignCarSpecificationsService.execute(input);
 
@@ -94,8 +94,8 @@ describe('AssignCarSpecificationsService', () => {
   it('throws an error if no specifications are found', async () => {
     const [car] = await carsRepository.list();
     const input = {
-      car_id: car.id,
-      specifications_ids: ['09650622-bb81-4a03-9ec6-622fa4f234aa'],
+      carId: car.id,
+      specificationsIds: ['09650622-bb81-4a03-9ec6-622fa4f234aa'],
     };
     const promise = assignCarSpecificationsService.execute(input);
 
