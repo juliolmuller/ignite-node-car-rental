@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
+import { CarImage } from './CarImage.model';
 import { Specification } from './Specification.model';
 
 export class Car {
@@ -12,6 +13,7 @@ export class Car {
   dailyRate: number;
   fineAmount: number;
   categoryId?: string;
+  images?: CarImage[];
   specifications?: Specification[];
   createdAt: Date;
   updatedAt: Date;
@@ -19,6 +21,7 @@ export class Car {
   constructor() {
     if (!this.id) {
       this.id = uuid();
+      this.images = [];
       this.specifications = [];
     }
   }

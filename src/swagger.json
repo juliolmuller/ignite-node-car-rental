@@ -73,6 +73,26 @@
         }
       }
     },
+    "carImage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "uploadedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "category": {
       "type": "object",
       "properties": {
@@ -362,13 +382,101 @@
         }
       }
     },
+    "/api/v1/cars/{carId}/images": {
+      "patch": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Upload images to a car",
+        "description": "",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "carId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Uploaded successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/carImage"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Car or specifications not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation errors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/cars/{carId}/specifications": {
       "patch": {
         "tags": [
           "Cars",
           "Specifications"
         ],
-        "summary": "Create new specification",
+        "summary": "Assign specifications to a car",
         "description": "",
         "security": [
           {
@@ -429,7 +537,7 @@
             }
           },
           "404": {
-            "description": "User or specifications not found",
+            "description": "Car not found",
             "content": {
               "application/json": {
                 "schema": {

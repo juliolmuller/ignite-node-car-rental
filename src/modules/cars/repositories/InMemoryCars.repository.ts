@@ -1,4 +1,4 @@
-import { Car, Specification } from '@/cars/models';
+import { Car, CarImage, Specification } from '@/cars/models';
 
 import { ICarsRepository, ICreateCarDTO, IListCarsDTO } from './interfaces';
 
@@ -56,13 +56,33 @@ export class InMemoryCarsRepository implements ICarsRepository {
     return car;
   }
 
+  async assignImages(carId: string, ...fileNames: string[]): Promise<CarImage[]> {
+    const now = new Date();
+    const car = await this.find(carId);
+    const images: CarImage[] = fileNames.map((fileName) => {
+      const carImage = new CarImage();
+
+      Object.assign(carImage, {
+        carId,
+        fileName,
+        uploadedAt: now,
+      });
+
+      car.images.push(carImage);
+
+      return carImage;
+    });
+
+    return images;
+  }
+
   async assignSpecifications(
     carId: string,
     ...specifications: Specification[]
   ): Promise<Specification[]> {
-    const user = await this.find(carId);
-    const existingSpecsCount = user?.specifications.length ?? 0;
-    user?.specifications.splice(0, existingSpecsCount, ...specifications);
+    const car = await this.find(carId);
+    const existingSpecsCount = car?.specifications.length ?? 0;
+    car?.specifications.splice(0, existingSpecsCount, ...specifications);
 
     return specifications;
   }

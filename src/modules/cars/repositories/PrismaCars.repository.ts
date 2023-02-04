@@ -1,4 +1,4 @@
-import { Car, Specification } from '@/cars/models';
+import { Car, CarImage, Specification } from '@/cars/models';
 import { prisma } from '~/database';
 
 import { ICarsRepository, ICreateCarDTO, IListCarsDTO } from './interfaces';
@@ -69,6 +69,18 @@ export class PrismaCarsRepository implements ICarsRepository {
     });
 
     return car;
+  }
+
+  async assignImages(carId: string, ...fileNames: string[]): Promise<CarImage[]> {
+    const output = await prisma.$transaction(
+      fileNames.map((fileName) => {
+        return prisma.carImages.create({
+          data: { carId, fileName },
+        });
+      })
+    );
+
+    return output;
   }
 
   async assignSpecifications(

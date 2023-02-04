@@ -57,6 +57,7 @@ model Car {
   createdAt          DateTime             @default(now()) @map("created_at")
   updatedAt          DateTime             @updatedAt @map("updated_at")
   carsSpecifications CarsSpecifications[]
+  images             CarImages[]
 
   @@map("cars")
 }
@@ -70,4 +71,14 @@ model CarsSpecifications {
 
   @@id([carId, specificationId])
   @@map("cars_specifications")
+}
+
+model CarImages {
+  id         String   @id @default(uuid())
+  carId      String   @map("car_id")
+  car        Car      @relation(fields: [carId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  fileName   String   @map("file_name")
+  uploadedAt DateTime @default(now()) @map("uploaded_at")
+
+  @@map("car_images")
 }

@@ -6,3 +6,4 @@ export * from './importCategories';
 export * from './listCars';
 export * from './listCategories';
 export * from './listSpecifications';
+export * from './uploadCarImages';
