@@ -1,4 +1,4 @@
-import { Car } from '@/cars/models';
+import { Car, Specification } from '@/cars/models';
 
 export interface ICreateCarDTO {
   name: string;
@@ -19,7 +19,9 @@ export interface IListCarsDTO {
 }
 
 export interface ICarsRepository {
-  findByLicensePlate(licensePlate: string): Promise<Car | null>;
-  create(dto: ICreateCarDTO): Promise<Car>;
   list(dto?: IListCarsDTO): Promise<Car[]>;
+  find(id: string): Promise<Car | undefined>;
+  findByLicensePlate(licensePlate: string): Promise<Car | undefined>;
+  create(dto: ICreateCarDTO): Promise<Car>;
+  assignSpecifications(carId: string, ...specifications: Specification[]): Promise<Specification[]>;
 }

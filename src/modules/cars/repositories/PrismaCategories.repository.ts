@@ -1,5 +1,3 @@
-import { validate } from 'uuid';
-
 import { Category } from '@/cars/models';
 import { prisma } from '~/database';
 
@@ -11,8 +9,9 @@ export class PrismaCategoriesRepository implements ICategoriesRepository {
   }
 
   async find(id: string): Promise<Category | null> {
-    const isUuidValid = validate(id);
-    const category = isUuidValid && (await prisma.category.findFirst({ where: { id } }));
+    const category = await prisma.category.findFirst({
+      where: { id },
+    });
 
     return category || null;
   }

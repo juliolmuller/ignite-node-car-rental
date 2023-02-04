@@ -7,7 +7,7 @@ export interface ICreateCategoryDTO {
 
 export interface ICategoriesRepository {
   list(): Promise<Category[]>;
-  find(id: string): Promise<Category | null>;
-  findByName(name: string): Promise<Category | null>;
+  find(id: string): Promise<Category | undefined>;
+  findByName(name: string): Promise<Category | undefined>;
   create({ name, description }: ICreateCategoryDTO): Promise<Category>;
 }

@@ -362,6 +362,95 @@
         }
       }
     },
+    "/api/v1/cars/{carId}/specifications": {
+      "patch": {
+        "tags": [
+          "Cars",
+          "Specifications"
+        ],
+        "summary": "Create new specification",
+        "description": "",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "carId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "example": [
+                  "3184c474-e8d8-4f41-aca3-5fea386f7631",
+                  "3152d307-94a3-4091-b0a6-ea4d7c032c2f",
+                  "5a8aeacf-4607-4e47-bcd3-01cf39bc6161"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Relationships established",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/specification"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User or specifications not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation errors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/cars/categories": {
       "get": {
         "tags": [

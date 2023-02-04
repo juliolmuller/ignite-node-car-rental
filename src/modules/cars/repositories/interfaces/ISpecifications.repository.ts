@@ -7,7 +7,8 @@ export interface ICreateSpecificationDTO {
 
 export interface ISpecificationsRepository {
   list(): Promise<Specification[]>;
-  find(id: string): Promise<Specification | null>;
-  findByName(name: string): Promise<Specification | null>;
+  find(id: string): Promise<Specification | undefined>;
+  findMany(...ids: string[]): Promise<Specification[]>;
+  findByName(name: string): Promise<Specification | undefined>;
   create({ name, description }: ICreateSpecificationDTO): Promise<Specification>;
 }

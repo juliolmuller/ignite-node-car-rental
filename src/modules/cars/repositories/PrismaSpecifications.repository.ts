@@ -1,5 +1,3 @@
-import { validate } from 'uuid';
-
 import { Specification } from '@/cars/models';
 import { prisma } from '~/database';
 
@@ -11,10 +9,23 @@ export class PrismaSpecificationsRepository implements ISpecificationsRepository
   }
 
   async find(id: string): Promise<Specification | null> {
-    const isUuidValid = validate(id);
-    const specification = isUuidValid && (await prisma.specification.findFirst({ where: { id } }));
+    const specification = await prisma.specification.findFirst({
+      where: { id },
+    });
 
     return specification || null;
+  }
+
+  async findMany(...ids: string[]): Promise<Specification[]> {
+    const specification = await prisma.specification.findMany({
+      where: {
+        id: {
+          in: ids,
+        },
+      },
+    });
+
+    return specification;
   }
 
   async findByName(name: string): Promise<Specification | null> {

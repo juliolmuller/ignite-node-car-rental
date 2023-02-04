@@ -1,3 +1,4 @@
+export * from './assignCarSpecifications';
 export * from './createCar';
 export * from './createCategory';
 export * from './createSpecification';

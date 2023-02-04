@@ -9,16 +9,24 @@ export class InMemorySpecificationsRepository implements ISpecificationsReposito
     return this.specifications;
   }
 
-  async find(id: string): Promise<Specification | null> {
+  async find(id: string): Promise<Specification | undefined> {
     const specification = this.specifications.find((specification) => specification.id === id);
 
-    return specification || null;
+    return specification ?? undefined;
   }
 
-  async findByName(name: string): Promise<Specification | null> {
+  async findMany(...ids: string[]): Promise<Specification[]> {
+    const specification = this.specifications.filter((specification) => {
+      return ids.includes(specification.id);
+    });
+
+    return specification;
+  }
+
+  async findByName(name: string): Promise<Specification | undefined> {
     const specification = this.specifications.find((specification) => specification.name === name);
 
-    return specification || null;
+    return specification ?? undefined;
   }
 
   async create({ name, description }: ICreateSpecificationDTO): Promise<Specification> {

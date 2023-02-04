@@ -1,15 +1,48 @@
-import { Car } from '@/cars/models';
+import { Car, Specification } from '@/cars/models';
 import { prisma } from '~/database';
 
 import { ICarsRepository, ICreateCarDTO, IListCarsDTO } from './interfaces';
 
 export class PrismaCarsRepository implements ICarsRepository {
-  async findByLicensePlate(licensePlate: string): Promise<Car | null> {
+  async list({ available, brand, category_id, name }: IListCarsDTO = {}): Promise<Car[]> {
+    const cars = await prisma.car.findMany({
+      where: {
+        AND: [
+          { available },
+          { category_id },
+          {
+            brand: brand && {
+              contains: brand,
+              mode: 'insensitive',
+            },
+          },
+          {
+            name: name && {
+              contains: name,
+              mode: 'insensitive',
+            },
+          },
+        ],
+      },
+    });
+
+    return cars;
+  }
+
+  async find(id: string): Promise<Car | undefined> {
+    const car = await prisma.car.findFirst({
+      where: { id },
+    });
+
+    return car ?? undefined;
+  }
+
+  async findByLicensePlate(licensePlate: string): Promise<Car | undefined> {
     const car = await prisma.car.findFirst({
       where: { license_plate: licensePlate },
     });
 
-    return car || null;
+    return car ?? undefined;
   }
 
   async create({
@@ -38,28 +71,35 @@ export class PrismaCarsRepository implements ICarsRepository {
     return car;
   }
 
-  async list({ available, brand, category_id, name }: IListCarsDTO = {}): Promise<Car[]> {
-    const cars = await prisma.car.findMany({
-      where: {
-        AND: [
-          { available },
-          { category_id },
-          {
-            brand: brand && {
-              contains: brand,
-              mode: 'insensitive',
-            },
+  async assignSpecifications(
+    carId: string,
+    ...specifications: Specification[]
+  ): Promise<Specification[]> {
+    const [, ...output] = await prisma.$transaction([
+      // delete all existing specifications assigned to given car
+      prisma.carsSpecifications.deleteMany({
+        where: {
+          car_id: carId,
+        },
+      }),
+      ...specifications.map(({ id: specId }) => {
+        return prisma.carsSpecifications.create({
+          data: {
+            specification_id: specId,
+            car_id: carId,
           },
-          {
-            name: name && {
-              contains: name,
-              mode: 'insensitive',
-            },
+          include: {
+            specification: true,
           },
-        ],
-      },
-    });
+        });
+      }),
+    ]);
 
-    return cars;
+    return output.map(
+      (carSpecification): Specification => ({
+        ...carSpecification.specification,
+        updated_at: carSpecification.assigned_at,
+      })
+    );
   }
 }

@@ -9,16 +9,16 @@ export class InMemoryCategoriesRepository implements ICategoriesRepository {
     return this.categories;
   }
 
-  async find(id: string): Promise<Category | null> {
+  async find(id: string): Promise<Category | undefined> {
     const category = this.categories.find((category) => category.id === id);
 
-    return category || null;
+    return category ?? undefined;
   }
 
-  async findByName(name: string): Promise<Category | null> {
+  async findByName(name: string): Promise<Category | undefined> {
     const category = this.categories.find((category) => category.name === name);
 
-    return category || null;
+    return category ?? undefined;
   }
 
   async create({ name, description }: ICreateCategoryDTO): Promise<Category> {
