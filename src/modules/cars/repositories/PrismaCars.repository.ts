@@ -74,7 +74,7 @@ export class PrismaCarsRepository implements ICarsRepository {
   async assignImages(carId: string, ...fileNames: string[]): Promise<CarImage[]> {
     const output = await prisma.$transaction(
       fileNames.map((fileName) => {
-        return prisma.carImages.create({
+        return prisma.carImage.create({
           data: { carId, fileName },
         });
       })
@@ -89,11 +89,11 @@ export class PrismaCarsRepository implements ICarsRepository {
   ): Promise<Specification[]> {
     const [, ...output] = await prisma.$transaction([
       // delete all existing specifications assigned to given car
-      prisma.carsSpecifications.deleteMany({
+      prisma.carSpecification.deleteMany({
         where: { carId },
       }),
       ...specifications.map(({ id: specId }) => {
-        return prisma.carsSpecifications.create({
+        return prisma.carSpecification.create({
           data: {
             specificationId: specId,
             carId,
