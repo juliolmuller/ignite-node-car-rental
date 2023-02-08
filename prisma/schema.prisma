@@ -39,6 +39,7 @@ model User {
   avatar        String?
   createdAt     DateTime @default(now()) @map("created_at")
   updatedAt     DateTime @updatedAt @map("updated_at")
+  rentals       Rental[]
 
   @@map("users")
 }
@@ -58,6 +59,7 @@ model Car {
   updatedAt          DateTime           @updatedAt @map("updated_at")
   carsSpecifications CarSpecification[]
   images             CarImage[]
+  rentals            Rental[]
 
   @@map("cars")
 }
@@ -81,4 +83,20 @@ model CarImage {
   uploadedAt DateTime @default(now()) @map("uploaded_at")
 
   @@map("car_images")
+}
+
+model Rental {
+  id                String    @id @default(uuid())
+  userId            String    @map("user_id")
+  user              User?     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  carId             String    @map("car_id")
+  car               Car?      @relation(fields: [carId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  pickUpDate        DateTime  @map("pickup_date")
+  dropOffDate       DateTime  @map("dropoff_date")
+  actualDropOffDate DateTime? @map("actual_dropoff_date")
+  total             Float
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
+
+  @@map("rentals")
 }

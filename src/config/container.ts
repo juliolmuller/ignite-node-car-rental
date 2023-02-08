@@ -9,6 +9,7 @@ import {
   PrismaCategoriesRepository,
   PrismaSpecificationsRepository,
 } from '@/cars/repositories';
+import { IRentalsRepository, PrismaRentalsRepository } from '@/rentals/repositories';
 import { IUsersRepository, PrismaUsersRepository } from '@/users/repositories';
 
 container.registerSingleton<ICarsRepository>('CarsRepository', PrismaCarsRepository);
@@ -22,5 +23,7 @@ container.registerSingleton<ISpecificationsRepository>(
   'SpecificationsRepository',
   PrismaSpecificationsRepository
 );
+
+container.registerSingleton<IRentalsRepository>('RentalsRepository', PrismaRentalsRepository);
 
 container.registerSingleton<IUsersRepository>('UsersRepository', PrismaUsersRepository);

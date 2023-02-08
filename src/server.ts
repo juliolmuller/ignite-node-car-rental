@@ -10,6 +10,7 @@ import {
   authRoutes,
   carsRoutes,
   categoriesRoutes,
+  rentalsRoutes,
   specificationsRoutes,
   usersRoutes,
 } from '~/routes';
@@ -29,5 +30,6 @@ app.use('/api/v1', carsRoutes);
 app.use('/api/v1', categoriesRoutes);
 app.use('/api/v1', specificationsRoutes);
 app.use('/api/v1', usersRoutes);
+app.use('/api/v1', rentalsRoutes);
 
 app.use(errorHandler);
