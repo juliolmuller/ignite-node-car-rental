@@ -1,7 +1,34 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import supertest from 'supertest';
+
 import { InMemoryCategoriesRepository } from '@/cars/repositories';
+import { AdminAuthorizationHeader, authorizeAdmin } from '~/__tests__/auth';
 import { UnprocessableEntityError } from '~/errors';
+import { app } from '~/server';
 
 import { CreateCategoryService } from './CreateCategory.service';
+
+describe('CreateCategoryController', () => {
+  let adminAuthorization: AdminAuthorizationHeader;
+  const http = supertest(app);
+
+  beforeEach(async () => {
+    adminAuthorization = await authorizeAdmin();
+  });
+
+  it('succeeds creating a category', async () => {
+    const payload = {
+      name: 'Test Category',
+      description: 'This is a dummy description for the category.',
+    };
+    const response = await http
+      .post('/api/v1/cars/categories')
+      .set(adminAuthorization)
+      .send(payload);
+
+    expect(response.status).toBe(201);
+  });
+});
 
 describe('CreateCategoryService', () => {
   let categoriesRepository: InMemoryCategoriesRepository;
