@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 import { InMemoryUsersRepository } from '@/users/repositories';
 import { BadRequestError } from '~/errors';
 

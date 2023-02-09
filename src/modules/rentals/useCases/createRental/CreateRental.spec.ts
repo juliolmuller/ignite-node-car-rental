@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 import { Car } from '@/cars/models';
 import { InMemoryCarsRepository } from '@/cars/repositories';
 import { InMemoryRentalsRepository } from '@/rentals/repositories';

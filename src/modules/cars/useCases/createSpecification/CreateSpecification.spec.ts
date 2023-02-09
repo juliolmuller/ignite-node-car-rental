@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 import { InMemorySpecificationsRepository } from '@/cars/repositories';
 import { UnprocessableEntityError } from '~/errors';
 
